@@ -1,11 +1,7 @@
 :root {
   --bodyBg: #f0f4f8;
   --menuBg: #334d68;
-  --progressBar: #54d1db;
-}
-
-body {
-
+  --progressBar: teal;
 }
 
 #menu {

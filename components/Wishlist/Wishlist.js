@@ -1,28 +1,16 @@
 import React from 'react';
-import CollectionStyles from './CollectionStyles';
-import Link from 'next/link';
+import WishlistStyles from './WishlistStyles';
 
-const Collection = ({ collectionName, pageLink }) => {
+const Wishlist = () => {
 
   return ( 
-    <CollectionStyles>
-        <div className="collection-header">
-          <div className="collection-info">{ collectionName } | 5 Bags For You</div>
-          <button> 
-            <Link href={pageLink}>
-              <a>
-              See All &#8594;
-              </a>
-            </Link>
-          </button>
-        </div>
-
+    <WishlistStyles>
         <div className="collection-items">
 
           <div className="collection-card">
             <div className="card-image-and-amount-wrapper">
                 <div className="img-box">
-                    <img src="./static/images/items/2.jpg" alt="" />
+                    <img src="../static/images/items/2.jpg" alt="" />
                 </div>
                 <div className="amount">
                     <span>$48.50</span>&nbsp; <s> $50 </s>
@@ -33,7 +21,6 @@ const Collection = ({ collectionName, pageLink }) => {
                   <div className="item-name">
                     Long Sleeve
                   </div>
-                  <button className="add-to-wishlist btn"><i className="fas fa-heart icon active" ></i></button>
                   <button className="add-to-cart btn">Add to Cart</button>
                 </div>
               <div className="bottom">
@@ -42,8 +29,8 @@ const Collection = ({ collectionName, pageLink }) => {
             </div>
           </div>
         </div>
-    </CollectionStyles>
+    </WishlistStyles>
   );
 }
 
-export default Collection;
+export default Wishlist;

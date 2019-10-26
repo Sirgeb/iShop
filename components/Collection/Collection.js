@@ -1,28 +1,16 @@
 import React from 'react';
-import CollectionStyles from './CollectionStyles';
-import Link from 'next/link';
+import CollectionStyles from '../CollectionPreview/CollectionStyles';
 
-const Collection = ({ collectionName, pageLink }) => {
+const Collection = () => {
 
   return ( 
     <CollectionStyles>
-        <div className="collection-header">
-          <div className="collection-info">{ collectionName } | 5 Bags For You</div>
-          <button> 
-            <Link href={pageLink}>
-              <a>
-              See All &#8594;
-              </a>
-            </Link>
-          </button>
-        </div>
-
         <div className="collection-items">
 
           <div className="collection-card">
             <div className="card-image-and-amount-wrapper">
                 <div className="img-box">
-                    <img src="./static/images/items/2.jpg" alt="" />
+                    <img src="../static/images/items/2.jpg" alt="" />
                 </div>
                 <div className="amount">
                     <span>$48.50</span>&nbsp; <s> $50 </s>

@@ -1,42 +1,6 @@
 import styled from 'styled-components';
 
-const CollectionStyles = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
-
-  a {
-    color: #393939;
-    text-decoration: none;
-  }
-
-  .collection-header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ccc;
-    border-bottom: 2px solid teal;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-
-  .collection-header button {
-    text-decoration: none;
-    font-weight: bold;
-    outline: none;
-    border: none;
-    background: none;
-    color: #393939;
-    font-family: 'Oswald', sans-serif;
-  }
-
-  .collection-header button:hover {
-    cursor: pointer;
-    padding-right: 10px;
-  }
-
+const WishlistStyle = styled.div`
   .collection-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
@@ -100,16 +64,14 @@ const CollectionStyles = styled.div`
     cursor: pointer;
   }
 
-  .collection-items .collection-card .wrapper .top .add-to-wishlist:hover {
-    color: #eb4b84;
-  }
 
   .collection-items .collection-card .wrapper .top .add-to-cart {
     font-size: 14px;
   }
+  
   .collection-items .collection-card .wrapper .top .add-to-cart:hover {
     opacity: 0.9;
-    font-size: 12px;
+    font-size: 13px;
   }
 
   .collection-items .collection-card .wrapper .bottom {
@@ -162,4 +124,4 @@ const CollectionStyles = styled.div`
   }
 `;
 
-export default CollectionStyles;
+export default WishlistStyle;

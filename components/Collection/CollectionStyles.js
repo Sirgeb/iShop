@@ -5,38 +5,6 @@ const CollectionStyles = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
 
-  a {
-    color: #393939;
-    text-decoration: none;
-  }
-
-  .collection-header {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ccc;
-    border-bottom: 2px solid teal;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-
-  .collection-header button {
-    text-decoration: none;
-    font-weight: bold;
-    outline: none;
-    border: none;
-    background: none;
-    color: #393939;
-    font-family: 'Oswald', sans-serif;
-  }
-
-  .collection-header button:hover {
-    cursor: pointer;
-    padding-right: 10px;
-  }
-
   .collection-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
