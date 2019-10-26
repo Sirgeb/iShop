@@ -11,6 +11,7 @@ const Home = () => (
     <Collection />
     <Collection />
     <Collection />
+    <Collection />
   </div>
 );
 

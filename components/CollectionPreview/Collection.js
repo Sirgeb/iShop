@@ -1,31 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
-
 import CollectionStyles from './CollectionStyles';
 
-const ALL_BAGS_QUERY = gql`
-  query {
-    items{
-      id
-      itemName
-      discountPercent
-      category
-      image1
-      image2
-      amount
-      newPrice
-      description
-    }
-  }
-`;
-
 const Collection = () => {
-  const { data, loading, error } = useQuery(ALL_BAGS_QUERY);
-
-  if (!loading) {
-    console.log(data);
-  }
 
   return ( 
     <CollectionStyles>
@@ -62,4 +38,5 @@ const Collection = () => {
     </CollectionStyles>
   );
 }
+
 export default Collection;
