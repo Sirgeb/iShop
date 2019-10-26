@@ -56,7 +56,6 @@ const CollectionStyles = styled.div`
 
   .collection-items .collection-card .card-image-and-amount-wrapper .img-box img {
     width: 100%;
-    width: 100%;
   }
 
   .collection-items .collection-card .card-image-and-amount-wrapper .amount s {
@@ -80,7 +79,7 @@ const CollectionStyles = styled.div`
     text-align: center;
     background: #eb4b84;
     padding: 5px;
-    font-size: 18px;
+    font-size: 16px;
     color: white;
   }
 
@@ -112,6 +111,10 @@ const CollectionStyles = styled.div`
     display: flex;
     padding: 10px;
     justify-content: flex-end;
+  }
+
+  .collection-items .collection-card .wrapper .bottom .discount-percent{
+    padding-top: 10px;
   }
 
   @media (max-width: 1000px) {

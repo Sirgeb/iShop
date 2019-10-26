@@ -1,6 +1,7 @@
+import React from 'react';
 import PageInfo from '../components/PageInfo/PageInfo';
 import IncredibleOffer from '../components/IncredibleOffer/IncredibleOffer';
-import Collection from '../components/Collection/Collection';
+import Collection from '../components/CollectionPreview/Collection';
 
 const Home = () => (
   <div>
