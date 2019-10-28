@@ -27,8 +27,16 @@ const Header = () => {
 
       <div className="nav">
         <ul>
-          <li><a><i className="fas fa-shopping-basket icon"></i><span>Shop</span></a></li>
-          <li><a><i className="fas fa-heart icon"></i><span>0</span></a></li>
+          <li>
+            <Link href="/">
+              <a><i className="fas fa-shopping-basket icon"></i><span>Shop</span></a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/wishlist">
+              <a><i className="fas fa-heart icon"></i><span>0</span></a>
+            </Link>
+          </li>
           <li><a><i className="fas fa-shopping-cart icon"></i><span>0</span></a></li>
           <li><a><i className="fas fa-box-open icon"></i><span>Orders</span></a></li>
           <li><a><i className="fas fa-tools icon"></i><span>Manage</span></a></li>
