@@ -1,15 +1,36 @@
 import React from 'react';
+import gql from 'graphql-tag';
 
-import PageInfo from '../../components/PageInfo/PageInfo';
 import Collection from '../../components/Collection/Collection';
 import Pagination from '../../components/Pagination/Pagination';
+
+const DEVICE_COLLECTION_QUERY = gql`
+query {
+    items(where: { category: DEVICE }, orderBy: createdAt_DESC) {
+      id
+      itemName
+      discountPercent
+      category
+      image1
+      image2
+      amount
+      newPrice
+      description
+    }
+    currentItem(where: { category: DEVICE }){
+      id
+    }
+  }
+`;
 
 const Device = () => {
 
   return (
     <>
-      <PageInfo message1={`5 Devices for you`} />
-      <Collection />
+      <Collection
+        collectionName="Device"
+        collectionQuery={DEVICE_COLLECTION_QUERY}
+       />
       <Pagination />
     </>
   );

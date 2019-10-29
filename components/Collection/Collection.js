@@ -1,36 +1,53 @@
 import React from 'react';
-import CollectionStyles from '../CollectionPreview/CollectionStyles';
+import { useQuery } from '@apollo/react-hooks';
 
-const Collection = () => {
+import formatText from '../../lib/formatText';
+import PageInfo from '../../components/PageInfo/PageInfo';
+import CollectionHeader from './CollectionHeader/CollectionHeader';
+import CollectionCard from './CollectionCard/CollectionCard';
+
+import CollectionStyles from './CollectionStyles';
+
+const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview }) => {
+
+  const { data, loading, error } = useQuery(collectionQuery);
+
+  if (loading) {
+    return <p>loading</p>
+  }
 
   return ( 
-    <CollectionStyles>
-        <div className="collection-items">
+    <>
+      {
+        !onCollectionPreview && (
+          <PageInfo 
+            message1={` ${formatText(data.items.length, collectionName)} `}
+          />
+        )
+      }
 
-          <div className="collection-card">
-            <div className="card-image-and-amount-wrapper">
-                <div className="img-box">
-                    <img src="../static/images/items/2.jpg" alt="" />
-                </div>
-                <div className="amount">
-                    <span>$48.50</span>&nbsp; <s> $50 </s>
-                </div>
-            </div>
-            <div className="wrapper">
-              <div className="top">
-                  <div className="item-name">
-                    Long Sleeve
-                  </div>
-                  <button className="add-to-wishlist btn"><i className="fas fa-heart icon active" ></i></button>
-                  <button className="add-to-cart btn">Add to Cart</button>
-                </div>
-              <div className="bottom">
-                  <span className="discount-percent">-3%</span>
-              </div>
-            </div>
+      {
+        onCollectionPreview && (
+          <CollectionHeader 
+            currentItem={data.currentItem} 
+            collectionName={collectionName} 
+            pageLink={pageLink}
+          />
+        )
+      }
+
+      <CollectionStyles>
+          <div className="collection-items">
+            {
+              data.items.map(item => (
+                <CollectionCard 
+                  { ...item} key={item.id}
+                />
+              ))
+            }
           </div>
-        </div>
-    </CollectionStyles>
+      </CollectionStyles>
+    </>
   );
 }
 

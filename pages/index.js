@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 
 import PageInfo from '../components/PageInfo/PageInfo';
 import IncredibleOffer from '../components/IncredibleOffer/IncredibleOffer';
-import Collection from '../components/CollectionPreview/Collection';
+import Collection from '../components/Collection/Collection';
 
 const BAG_COLLECTION_QUERY = gql`
 query {
@@ -96,6 +96,24 @@ query {
   }
 `;
 
+const INCREDIBLE_OFFER_QUERY = gql`
+  query {
+    items(where: {
+      discountPercent_gt: 15
+    }, first: 4, orderBy: createdAt_DESC) {
+      id
+      itemName
+      discountPercent
+      category
+      image1
+      image2
+      amount
+      newPrice
+      description
+    }
+  }
+`;
+
 
 const Home = () => {
 
@@ -103,36 +121,46 @@ const Home = () => {
     <>
       <PageInfo message1={`WELCOME TO iSHOP`} message2={`🔥 Hot Deals for you 👇`} />
 
-      <IncredibleOffer />
+      <IncredibleOffer
+        pageLink="/incredible-offer"
+        collectionName="Incredible Offer"
+        collectionQuery={INCREDIBLE_OFFER_QUERY}
+        onCollectionPreview={true}
+      />
 
       <Collection 
         pageLink="/collection/bag" 
         collectionName="Bag" 
         collectionQuery={BAG_COLLECTION_QUERY}
+        onCollectionPreview={true}
       />
 
       <Collection 
         pageLink="/collection/shirt" 
         collectionName="Shirt" 
         collectionQuery={SHIRT_COLLECTION_QUERY}
+        onCollectionPreview={true}
       />
 
       <Collection 
         pageLink="/collection/device" 
         collectionName="Device" 
         collectionQuery={DEVICE_COLLECTION_QUERY}
+        onCollectionPreview={true}
       />
 
       <Collection 
         pageLink="/collection/wrist-watch" 
         collectionName="Wrist Watch" 
         collectionQuery={WRIST_WATCH_COLLECTION_QUERY}
+        onCollectionPreview={true}
       />
 
       <Collection 
         pageLink="/collection/shoe" 
         collectionName="Shoe" 
         collectionQuery={SHOE_COLLECTION_QUERY}
+        onCollectionPreview={true}
       />
     </>
   )

@@ -1,15 +1,36 @@
 import React from 'react';
+import gql from 'graphql-tag';
 
-import PageInfo from '../../components/PageInfo/PageInfo';
 import Collection from '../../components/Collection/Collection';
 import Pagination from '../../components/Pagination/Pagination';
+
+const SHOE_COLLECTION_QUERY = gql`
+query {
+    items(where: { category: SHOE }, orderBy: createdAt_DESC) {
+      id
+      itemName
+      discountPercent
+      category
+      image1
+      image2
+      amount
+      newPrice
+      description
+    }
+    currentItem(where: { category: SHOE }){
+      id
+    }
+  }
+`;
 
 const Shoe = () => {
 
   return (
     <>
-      <PageInfo message1={`5 Shoes for you`} />
-      <Collection />
+      <Collection 
+        collectionName="Shoe"
+        collectionQuery={SHOE_COLLECTION_QUERY}
+      />
       <Pagination />
     </>
   );
