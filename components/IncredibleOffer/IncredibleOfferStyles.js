@@ -7,6 +7,7 @@ const IncredibleOfferStyles = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0;
+  margin-bottom: 20px;
 
 
   .card {

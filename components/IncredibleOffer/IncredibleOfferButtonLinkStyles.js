@@ -9,11 +9,11 @@ const IncredibleOfferButtonLinkStyles = styled.button`
   width: 100%;
   padding: 40px;
   outline: none;
-  margin: 15px 0 10px 0; 
+  margin-bottom: 10px;
   color: teal;
   font-size: 20px;
   border-top: 2px solid teal;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
 
   &:hover {
     cursor: pointer;

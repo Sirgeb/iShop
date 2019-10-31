@@ -4,15 +4,22 @@ import { useQuery } from '@apollo/react-hooks';
 import IncredibleOfferStyles from './IncredibleOfferStyles';
 import IncredibleOfferButtonLink from './IncredibleOfferButtonLink';
 import formatMoney from '../../lib/formatMoney';
+import PageInfo from '../../components/PageInfo/PageInfo';
 
-const IncredibleOffer = ({ collectionQuery, pageLink, collectionName }) => {
+const IncredibleOffer = ({ collectionQuery, onCollectionPreview }) => {
   const { data, loading, error } = useQuery(collectionQuery);
 
   if (loading) return <p>Loading</p>;
 
   return (
     <>
-    <IncredibleOfferStyles>
+      {
+        !onCollectionPreview && (
+          <PageInfo message1="Incredible Offer" message2={`We have ${data.items.length} items for you`}/>
+        )
+      }
+
+      <IncredibleOfferStyles>
         {
           data.items.map(item => (
             <div className="card" key={item.id}>
@@ -28,8 +35,13 @@ const IncredibleOffer = ({ collectionQuery, pageLink, collectionName }) => {
             </div>
           ))
         }
-    </IncredibleOfferStyles>
-    <IncredibleOfferButtonLink />
+      </IncredibleOfferStyles>
+
+      {
+        onCollectionPreview && (
+          <IncredibleOfferButtonLink />
+        )
+      }
     </>
   );
 } 

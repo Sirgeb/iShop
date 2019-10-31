@@ -1,6 +1,7 @@
 import React from 'react';
 import gql from 'graphql-tag';
 
+import Pagination from '../components/Pagination/Pagination';
 import IncredibleOfferComponent from '../components/IncredibleOffer/IncredibleOffer';
 
 const INCREDIBLE_OFFER_QUERY = gql`
@@ -24,10 +25,15 @@ const INCREDIBLE_OFFER_QUERY = gql`
 const IncredibleOffer = () => {
 
   return (
-    <IncredibleOfferComponent
-      collectionName="Incredible Offer"
-      collectionQuery={INCREDIBLE_OFFER_QUERY}
-    />
+    <>
+      <IncredibleOfferComponent
+        collectionName="Incredible Offer"
+        collectionQuery={INCREDIBLE_OFFER_QUERY}
+        onCollectionPreview={false}
+      />
+      
+      <Pagination />
+    </>
   )
 }
 
