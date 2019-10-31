@@ -5,15 +5,16 @@ import formatText from '../../lib/formatText';
 import PageInfo from '../../components/PageInfo/PageInfo';
 import CollectionHeader from './CollectionHeader/CollectionHeader';
 import CollectionCard from './CollectionCard/CollectionCard';
+import Spinner from '../Spinner/Spinner';
 
 import CollectionStyles from './CollectionStyles';
 
-const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview }) => {
+const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview, spacing }) => {
 
   const { data, loading, error } = useQuery(collectionQuery);
 
   if (loading) {
-    return <p>loading</p>
+    return <Spinner spacing={spacing}/>
   }
 
   return ( 
@@ -41,7 +42,7 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
             {
               data.items.map(item => (
                 <CollectionCard 
-                  { ...item} key={item.id}
+                  { ...item} key={item.id} onCollectionPreview={onCollectionPreview}
                 />
               ))
             }

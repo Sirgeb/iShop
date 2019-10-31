@@ -30,6 +30,7 @@ const IncredibleOffer = () => {
         collectionName="Incredible Offer"
         collectionQuery={INCREDIBLE_OFFER_QUERY}
         onCollectionPreview={false}
+        spacing="200px"
       />
       
       <Pagination />

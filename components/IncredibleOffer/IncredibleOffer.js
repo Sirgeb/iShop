@@ -5,11 +5,12 @@ import IncredibleOfferStyles from './IncredibleOfferStyles';
 import IncredibleOfferButtonLink from './IncredibleOfferButtonLink';
 import formatMoney from '../../lib/formatMoney';
 import PageInfo from '../../components/PageInfo/PageInfo';
+import Spinner from '../Spinner/Spinner';
 
-const IncredibleOffer = ({ collectionQuery, onCollectionPreview }) => {
+const IncredibleOffer = ({ collectionQuery, onCollectionPreview, spacing }) => {
   const { data, loading, error } = useQuery(collectionQuery);
 
-  if (loading) return <p>Loading</p>;
+  if (loading) return <Spinner spacing={spacing}/>;
 
   return (
     <>

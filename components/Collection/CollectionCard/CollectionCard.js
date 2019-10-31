@@ -3,10 +3,10 @@ import formatMoney from '../../../lib/formatMoney';
 
 import CollectionCardStyles from './CollectionCardStyles';
 
-const CollectionCard = ({ itemName, image1, newPrice, amount, discountPercent }) => {
+const CollectionCard = ({ itemName, image1, newPrice, amount, discountPercent, onCollectionPreview }) => {
 
   return (
-    <CollectionCardStyles>
+    <CollectionCardStyles onCollectionPreview={onCollectionPreview}>
         <div className="card-image-and-amount-wrapper">
             <div className="img-box">
                 <img src={image1} alt={itemName} />
