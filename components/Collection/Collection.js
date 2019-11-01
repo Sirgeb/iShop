@@ -9,12 +9,12 @@ import Spinner from '../Spinner/Spinner';
 
 import CollectionStyles from './CollectionStyles';
 
-const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview, spacing }) => {
+const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview }) => {
 
   const { data, loading, error } = useQuery(collectionQuery);
 
   if (loading) {
-    return <Spinner spacing={spacing}/>
+    return <Spinner />
   }
 
   return ( 

@@ -30,7 +30,6 @@ const WristWatch = () => {
       <Collection 
         collectionName="Wrist Watch"
         collectionQuery={WRIST_WATCH_COLLECTION_QUERY}
-        spacing="200px"
       />
       <Pagination />
     </>

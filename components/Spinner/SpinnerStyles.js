@@ -6,7 +6,7 @@ const SpinnerStyles = styled.div`
   height: 20vh;
   margin: 0 auto;
   background: rgba(255, 255, 255, 40%);
-  margin-top: ${props => props.spacing ? props.spacing : 0};
+  margin-top: 200px;
 
   .spinner {
     position: absolute;

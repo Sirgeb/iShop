@@ -30,7 +30,6 @@ const Shirt = () => {
       <Collection 
         collectionName="Shirt"
         collectionQuery={SHIRT_COLLECTION_QUERY}
-        spacing="200px"
       />
       <Pagination />
     </>

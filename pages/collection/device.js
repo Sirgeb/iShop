@@ -30,7 +30,6 @@ const Device = () => {
       <Collection
         collectionName="Device"
         collectionQuery={DEVICE_COLLECTION_QUERY}
-        spacing="200px"
        />
       <Pagination />
     </>
