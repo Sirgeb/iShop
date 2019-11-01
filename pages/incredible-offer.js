@@ -22,7 +22,7 @@ const INCREDIBLE_OFFER_QUERY = gql`
   }
 `;
 
-const IncredibleOffer = () => {
+const IncredibleOffer = props => {
 
   return (
     <>

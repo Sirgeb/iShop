@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
+import Link from 'next/link';
 
 import IncredibleOfferStyles from './IncredibleOfferStyles';
 import IncredibleOfferButtonLink from './IncredibleOfferButtonLink';
@@ -23,17 +24,21 @@ const IncredibleOffer = ({ collectionQuery, onCollectionPreview, spacing }) => {
       <IncredibleOfferStyles>
         {
           data.items.map(item => (
-            <div className="card" key={item.id}>
-              <div className="image-box">
-                <img src={item.image1} alt={item.itemName} />
-              </div>
-              <div className="content">
-                <div className="discount-percent">{item.discountPercent}% discount</div>
-                <div className="item-name">{item.itemName}</div>
-                <div className="amount"><s>{formatMoney(item.amount)}</s></div>
-                <div className="discount-amount">{formatMoney(item.newPrice)}</div>
-              </div>
-            </div>
+            <Link href={{ pathname: '/item', query: { id: item.id} }} key={item.id}>
+              <a>
+                <div className="card">
+                  <div className="image-box">
+                    <img src={item.image1} alt={item.itemName} />
+                  </div>
+                  <div className="content">
+                    <div className="discount-percent">{item.discountPercent}% discount</div>
+                    <div className="item-name">{item.itemName}</div>
+                    <div className="amount"><s>{formatMoney(item.amount)}</s></div>
+                    <div className="discount-amount">{formatMoney(item.newPrice)}</div>
+                  </div>
+                </div>
+              </a>
+            </Link>
           ))
         }
       </IncredibleOfferStyles>

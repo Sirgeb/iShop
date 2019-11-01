@@ -1,16 +1,21 @@
 import React from 'react';
+import Link from 'next/link';
 import formatMoney from '../../../lib/formatMoney';
 
 import CollectionCardStyles from './CollectionCardStyles';
 
-const CollectionCard = ({ itemName, image1, newPrice, amount, discountPercent, onCollectionPreview }) => {
+const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent, onCollectionPreview }) => {
 
   return (
-    <CollectionCardStyles onCollectionPreview={onCollectionPreview}>
+    <CollectionCardStyles hide={onCollectionPreview}>
         <div className="card-image-and-amount-wrapper">
-            <div className="img-box">
-                <img src={image1} alt={itemName} />
-            </div>
+          <Link href={{ pathname: '/item', query: {id} }}>
+            <a>
+              <div className="img-box">
+                  <img src={image1} alt={itemName} />
+              </div>
+            </a>
+          </Link>
             <div className="amount">
                 <span>{formatMoney(newPrice)}</span>&nbsp; <s> {formatMoney(amount)} </s>
             </div>
