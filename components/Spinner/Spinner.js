@@ -2,10 +2,10 @@ import React from 'react';
 
 import SpinnerStyles from './SpinnerStyles';
 
-const Spinner = () => {
+const Spinner = ({ spacing }) => {
 
   return(
-    <SpinnerStyles>
+    <SpinnerStyles spacing={spacing}>
       <div className="spinner"></div>
     </SpinnerStyles>
   )

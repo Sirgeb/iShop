@@ -27,7 +27,7 @@ const Item = ({ id }) => {
     variables: { id },
   });
 
-  if (loading) return <Spinner />
+  if (loading) return <Spinner spacing="200px"/>
 
   const { description, image1, image2, itemName, newPrice } = data.item;
 
