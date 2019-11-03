@@ -96,6 +96,7 @@ const ItemStyles = styled.div`
 
   .content h2 {
     background:teal;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
     color: white;
     font-weight: 500;
     margin: 10px 0;

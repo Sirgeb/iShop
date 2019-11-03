@@ -79,6 +79,7 @@ const HeaderStyles = styled.div`
     justify-content: space-around;
     flex: 1;
     list-style: none;
+    white-space: nowrap;
   }
 
   .nav ul li a {

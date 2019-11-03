@@ -15,7 +15,6 @@ const OrderStyles = styled.div`
     cursor: pointer;
     background: #ccc;
     transition: all 0.3s ease;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
   }
 
@@ -40,7 +39,6 @@ const OrderStyles = styled.div`
     background: white;
     overflow: hidden;
     transition: all 0.3s ease;
-    font-family: 'Roboto', sans-serif;
     font-size: 16px;
   }
 

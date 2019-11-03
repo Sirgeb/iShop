@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
-const CartStyles = styled.div`
-  table {
-    border-spacing: 0;
-    width: 100%;
-    border-right: 1px solid #ccc;
-  }
+const Table = styled.table`
+  border-spacing: 0;
+  width: 100%;
+  border-right: 1px solid #ccc;
 
-  table td,th {
+  td,th {
     border-bottom: 1px solid #ccc;
     border-left: 1px solid #ccc;
     padding: 10px 5px;
@@ -17,34 +15,34 @@ const CartStyles = styled.div`
     font-weight: 500;
   }
 
-  table th {
+  th {
     background: teal;
     color: white;
   }
 
-  table td {
+  td {
     height: 100px;
   }
 
-  table td:nth-child(5) a {
+  td:nth-child(5) a {
     color: #393939;
   }
 
-  table td:nth-child(5) a:hover{
+  td:nth-child(5) a:hover{
     color: teal;
     cursor: pointer;
   } 
 
-  table td:nth-child(6) i:hover{
+  td:nth-child(6) i:hover{
     color: teal;
     cursor: pointer;
   } 
 
-  table td img{
+  td img{
     max-width: 100px;
   }
 
-  table td button {
+  td button {
     outline: none;
     border: none;
     padding: 10px;
@@ -52,11 +50,11 @@ const CartStyles = styled.div`
     width: 40px;
   }
 
-  table td button:hover {
+  td button:hover {
     cursor: pointer;
     background: teal;
     color: white;
   }
 `;
 
-export default CartStyles;
+export default Table;

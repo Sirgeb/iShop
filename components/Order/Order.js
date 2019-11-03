@@ -11,7 +11,7 @@ const Order = () => {
       <OrderStyles>
         <div className="accordion-wrapper">
           <input id="abc" name="myaccordion" type="checkbox" />
-          <label for="abc">
+          <label htmlFor="abc">
           <strong>•</strong> Date / Time
           </label>
           <div className="insidecontainer">
@@ -22,7 +22,7 @@ const Order = () => {
             </p>
             <div className="items-wrapper">
                     <div className="item">
-                        <img src="./static/images/items/1.jpg" width="100" />
+                        <img src="./static/images/items/1.jpg" width="100" height="100" />
                         <div className="item-details">
                           <span>item name</span>
                           <span> Quantity:</span>
@@ -33,7 +33,7 @@ const Order = () => {
                         </div>
                     </div>
                     <div className="item">
-                      <img src="./static/images/items/2.jpg" width="100" />
+                      <img src="./static/images/items/2.jpg" width="100" height="100"/>
                       <div className="item-details">
                         <span>item name</span>
                         <span> Quantity:</span>

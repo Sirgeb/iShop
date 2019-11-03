@@ -47,8 +47,16 @@ const Header = () => {
               <a><i className="fas fa-box-open icon"></i><span>Orders</span></a>
             </Link>
           </li>
-          <li><a><i className="fas fa-tools icon"></i><span>Manage</span></a></li>
-          <li><a><i className="far fa-user-circle icon"></i><span>Account</span></a></li>
+          <li>
+            <Link href="/manage">
+              <a><i className="fas fa-tools icon"></i><span>Manage</span></a>
+            </Link>
+          </li>
+          <li>
+            <Link href="/signin">
+              <a><i className="far fa-user-circle icon"></i><span>Sign in</span></a>
+            </Link>
+          </li>
           <li><a><i className="fas fa-power-off icon"></i><span>Signout</span></a></li>
         </ul>
       </div>
