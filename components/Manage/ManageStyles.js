@@ -12,3 +12,15 @@ export const AddItem = styled.div`
     text-decoration: none;
   }
 `;
+
+export const IconStyle = styled.div`
+  cursor: pointer;
+
+  .update:hover {
+    color: teal;
+  }
+
+  .remove:hover {
+    color: #eb4b84;
+  }
+`;

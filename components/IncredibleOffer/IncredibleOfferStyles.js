@@ -11,7 +11,7 @@ const IncredibleOfferStyles = styled.div`
 
 
   .card {
-    display: flex;
+    display: grid;
     justify-content: center;
     align-items: center;
     flex: 1;
@@ -78,7 +78,11 @@ const IncredibleOfferStyles = styled.div`
     padding:5px
   }
 
-  @media (max-width: 1000px) {
+  &:last-child {
+    display:grid;
+  }
+
+  @media (max-width: 700px) {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 10px;
@@ -88,10 +92,10 @@ const IncredibleOfferStyles = styled.div`
 
     .card {
       height: 250px;
-    }
 
-    .card:last-child {
-      display: none;
+      &:last-child {
+        display: none;
+      }
     }
 
     .card .content {

@@ -1,9 +1,11 @@
 import React from 'react';
+import Link from 'next/link';
 
 import PageInfo from '../PageInfo/PageInfo';
 import Table from '../styles/Table';
 import SearchItem from './SearchItem';
-import { AddItem } from './ManageStyles';
+import { AddItem, IconStyle } from './ManageStyles';
+
 
 const Manage = () => {
 
@@ -12,7 +14,9 @@ const Manage = () => {
       <PageInfo message1="Manage" message2="1 item in Store" />
 
       <AddItem>
-        <a><i className="fas fa-plus"></i> Add an Item</a>
+        <Link href="/add">
+          <a><i className="fas fa-plus"></i> Add an Item</a>
+        </Link>
       </AddItem>
 
       <SearchItem />
@@ -34,8 +38,8 @@ const Manage = () => {
                 </td>
                 <td> Black Shirt </td>
                 <td>$8000</td>
-                <td><i className="fas fa-pen-square icon"></i></td>
-                <td><i className="fas fa-trash-alt icon"></i> </td>
+                <td><IconStyle><i className="fas fa-pen-square icon update"></i></IconStyle></td>
+                <td><IconStyle><i className="fas fa-trash-alt icon remove"></i></IconStyle></td>
              </tr>
         </tbody>
       </Table>

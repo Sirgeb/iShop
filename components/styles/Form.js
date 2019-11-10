@@ -25,7 +25,7 @@ const Form = styled.form`
     z-index: 1;
   }
 
-  input {
+  input, select, textarea {
     display: block;
     position: relative;
     background: none;
@@ -34,18 +34,28 @@ const Form = styled.form`
     font-family: 'Helvetica', sans-serif;
     width: 100%;
     font-size: 16px;
-    z-index: 2;
+    z-index: 1;
   }
 
-  input:focus, input:valid {
+  input:focus, input:disabled, input:valid {
     outline: none;
     border-bottom: 1px solid teal;
   }
 
-  input:focus + label, input:valid + label {
+  input:focus + label, input:valid + label, input:disabled + label, select:focus + label, select:valid + label {
     top: -40px;
     font-size: 12px;
     color: #7f8385;
+  }
+
+  select, textarea {
+    outline: none;
+    border-bottom: 1px solid teal;
+  }
+
+  textarea:focus + label, textarea:valid + label {
+    font-size: 12px;
+    top: -70px;
   }
 
   .divider {
@@ -66,6 +76,13 @@ const Form = styled.form`
     cursor: pointer;
     background: teal;
     color: white;
+  }
+
+  .center {
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column
   }
 `;
 
