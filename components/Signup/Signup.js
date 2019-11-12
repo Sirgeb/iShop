@@ -1,28 +1,93 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/react-hooks';
 import Link from 'next/link';
+import gql from 'graphql-tag';
 
 import Form from '../styles/Form';
 import PageInfo from '../PageInfo/PageInfo';
 import { Center } from './SignupStyles';
 
+const SIGNUP_MUTATION = gql`
+  mutation SIGNUP_MUTATION($username: String!, $email: String!, $password: String!) {
+    signup(username: $username, email: $email,  password: $password) {
+      id
+      username
+      email 
+    }
+  }
+`;
+
+const INITIAL_STATE = {
+  username: "",
+  email: "",
+  password: ""
+}
+
 const Signup = () => {
+
+  const [user, setUser] = useState(INITIAL_STATE);
+  const [signup, { data, loading, error }] = useMutation(SIGNUP_MUTATION);
+
+  if (loading) {
+    console.log(loading);
+  }
+
+  if (error) {
+    console.log("error:", error.message);
+  }
+
+  if (data) {
+    console.log(data);
+  }
+
+  function handleChange(event) {
+    const { value, name } = event.target;
+    setUser((prevState) => ({
+      ...prevState,
+      [name]: value
+    }));
+  }
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    await signup({ variables: { ...user }})
+    setUser(INITIAL_STATE);
+  }
 
   return (  
     <>
     <PageInfo message1="Sign up" message2="" />
 
-    <Form autoComplete="off">
-    <input type="text" id="username"/>
+    <Form autoComplete="off" method="post" onSubmit={handleSubmit}>
+      <input 
+        type="text" 
+        id="username"
+        name="username"
+        value={user.username}
+        onChange={handleChange}
+      />
       <label htmlFor="username">Username</label>
 
       <div className="divider"></div>
 
-      <input type="email" id="email"/>
+      <input 
+        type="email" 
+        name="email"
+        value={user.email}
+        id="email"
+        onChange={handleChange}
+      />
       <label htmlFor="email">Email</label>
 
       <div className="divider"></div>
 
-      <input type="password" id="password"/>
+      <input 
+        type="password" 
+        name="password"
+        value={user.password}
+        id="password"
+        onChange={handleChange}
+      />
       <label htmlFor="password">Password</label>
 
       <div className="divider"></div>

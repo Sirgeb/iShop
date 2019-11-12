@@ -42,7 +42,7 @@ const Form = styled.form`
     border-bottom: 1px solid teal;
   }
 
-  input:focus + label, input:valid + label, input:disabled + label, select:focus + label, select:valid + label {
+  input:focus + label, input[type=email] + label, input:valid + label, input:disabled + label, select:focus + label, select:valid + label {
     top: -40px;
     font-size: 12px;
     color: #7f8385;
