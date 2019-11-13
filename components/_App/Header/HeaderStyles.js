@@ -59,43 +59,6 @@ const HeaderStyles = styled.div`
     font-family: 'Oswald', sans-serif;
   }
 
-  .nav {
-    position: relative;
-    display: flex;
-    flex: 4;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .nav ul {
-    display: flex;
-    flex: 1;
-    margin: 0;
-    padding: 0;
-  }
-
-  .nav ul li {
-    display: flex;
-    justify-content: space-around;
-    flex: 1;
-    list-style: none;
-    white-space: nowrap;
-  }
-
-  .nav ul li a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-decoration: none;
-    color: teal;
-  }
-
-  .nav ul li a:hover {
-    color: #393939;
-    cursor: pointer;
-  }
-
   @media (max-width: 700px) {
     display: flex;
     position: relative;
@@ -113,34 +76,8 @@ const HeaderStyles = styled.div`
       font-size: 20px;
     }
 
-    .nav {
-      width: 100%;
-      position: absolute;
-      top: 95px;
-      left: 0;
-      scroll-behavior: smooth;
-      overflow: scroll;
-      padding-bottom: 5px;
-      padding-top: 5px;
-      background: white;
-    }
-
-    .nav ul li {
-      margin-right: 20px;
-    }
-
-    .nav ul li:first-child {
-      margin-left: 20px;
-    }
-
     .icon {
       font-size: 30px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    .nav ul li:first-child {
-      margin-left: 70px;
     }
   }
 `;

@@ -1,38 +1,96 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Mutation } from 'react-apollo';
+import Router from 'next/router';
+import gql from 'graphql-tag';
 import Link from 'next/link';
+import { CURRENT_USER_QUERY } from '../User/User';
 
 import Form from '../styles/Form';
 import PageInfo from '../PageInfo/PageInfo';
 import { Center } from './SigninStyles';
 
+const SIGN_IN_MUTATION = gql`
+  mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
+    signin(email: $email, password: $password) {
+      id
+    }
+  }
+`;
+
+const INITIAL_STATE = {
+  email: "",
+  password: ""
+};
+
 const Signin = () => {
+  const [user, setUser] = useState(INITIAL_STATE);
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setUser((prevState) => ({...prevState, [name]: value}));
+  }
+
+  async function handleSubmit(event, signin) {
+    event.preventDefault();
+    await signin({
+      variables: { ...user}
+    });
+    setUser(INITIAL_STATE);
+    Router.push({ pathname: '/' });
+  }
 
   return (  
-    <>
-    <PageInfo message1="Sign in" message2="" />
+    <Mutation 
+      mutation={SIGN_IN_MUTATION}
+      refetchQueries={[{ query: CURRENT_USER_QUERY}]}> 
 
-    <Form autoComplete="off">
-      <input type="email" id="email"/>
-      <label htmlFor="email">Email</label>
+      {
+        (signin, { data, loading }) => {
 
-      <div className="divider"></div>
+          if (loading) console.log(loading);
+          
+          return (
+            <> 
+              <PageInfo message1="Sign in" message2="" />
 
-      <input type="password" id="password"/>
-      <label htmlFor="password">Password</label>
+              <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event, signin)}>
+                <input 
+                  type="email" 
+                  name="email"
+                  onChange={handleChange}
+                  value={user.email}
+                  id="email"
+                />
+                <label htmlFor="email">Email</label>
 
-      <div className="divider"></div>
+                <div className="divider"></div>
 
-      <Center>
-        <button type="submit">Login</button> 
-        <p>Don't have an account?&nbsp;
-          <Link href="/signup">
-            <a>Sign up</a>
-          </Link>
-        </p>
-      </Center>
-    </Form>
+                <input 
+                  type="password" 
+                  name="password"
+                  onChange={handleChange}
+                  value={user.password}
+                  id="password"
+                />
+                <label htmlFor="password">Password</label>
 
-    </>
+                <div className="divider"></div>
+
+                <Center>
+                  <button type="submit">Login</button> 
+                  <p>Don't have an account?&nbsp;
+                    <Link href="/signup">
+                      <a>Sign up</a>
+                    </Link>
+                  </p>
+                </Center>
+              </Form>
+            </>
+          )
+        }
+      }
+
+    </Mutation>
   )
 }
 

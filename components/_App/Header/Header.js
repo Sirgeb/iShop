@@ -4,11 +4,14 @@ import Link from 'next/link';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 
+import Nav from '../../Nav/Nav';
+
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
 Router.onRouteChangeError = () => NProgress.done();
 
 const Header = () => {
+
   return (
     <HeaderStyles>
       <div className="wrapper">
@@ -24,42 +27,7 @@ const Header = () => {
           <input type="search" name="search" autoFocus placeholder="What do you want to buy?"/>
         </div>
       </div>
-
-      <div className="nav">
-        <ul>
-          <li>
-            <Link href="/">
-              <a><i className="fas fa-shopping-basket icon"></i><span>Shop</span></a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/wishlist">
-              <a><i className="fas fa-heart icon"></i><span>0</span></a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/cart">
-              <a><i className="fas fa-shopping-cart icon"></i><span>0</span></a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/orders">
-              <a><i className="fas fa-box-open icon"></i><span>Orders</span></a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/manage">
-              <a><i className="fas fa-tools icon"></i><span>Manage</span></a>
-            </Link>
-          </li>
-          <li>
-            <Link href="/signin">
-              <a><i className="far fa-user-circle icon"></i><span>Sign in</span></a>
-            </Link>
-          </li>
-          <li><a><i className="fas fa-power-off icon"></i><span>Signout</span></a></li>
-        </ul>
-      </div>
+      <Nav />
     </HeaderStyles>
   )
 }

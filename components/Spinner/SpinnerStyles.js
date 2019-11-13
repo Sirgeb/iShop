@@ -5,7 +5,7 @@ const SpinnerStyles = styled.div`
   width: 80%;
   height: 20vh;
   margin: 0 auto;
-  background: rgba(255, 255, 255, 40%);
+  /* background: rgba(255, 255, 255, 40%); */
   margin-top: ${props => props.spacing ? props.spacing : "0px"};
 
   .spinner {

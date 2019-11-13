@@ -1,6 +1,5 @@
 import App from "next/app";
-import { ApolloProvider } from '@apollo/react-hooks';
-
+import { ApolloProvider } from 'react-apollo';
 import withApollo from '../lib/withApollo';
 import Layout from '../components/_App/Layout/Layout';
 
