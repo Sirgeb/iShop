@@ -1,11 +1,14 @@
 import React from 'react';
 
+import SigninAuth from '../components/Signin/SigninAuth';
 import AddItem from '../components/AddItem/AddItem';
 
 const Add = () => {
 
   return (
-    <AddItem />
+    <SigninAuth>
+      <AddItem />
+    </SigninAuth>
   )
 }
 

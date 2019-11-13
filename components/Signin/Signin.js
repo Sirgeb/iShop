@@ -22,7 +22,15 @@ const INITIAL_STATE = {
   password: ""
 };
 
-const Signin = () => {
+const authMessage = {
+  wishlist: "To view wishlist",
+  cart: "To view cart",
+  orders: "To view orders",
+  manage: "To manage Items in store",
+  add: "To add an item",
+}
+
+const Signin = ({ pathname }) => {
   const [user, setUser] = useState(INITIAL_STATE);
 
   function handleChange(event) {
@@ -45,13 +53,23 @@ const Signin = () => {
       refetchQueries={[{ query: CURRENT_USER_QUERY}]}> 
 
       {
-        (signin, { data, loading }) => {
+        (signin, { data, loading, error }) => {
 
           if (loading) console.log(loading);
           
           return (
             <> 
-              <PageInfo message1="Sign in" message2="" />
+              <PageInfo 
+                  message1={"Sign into your account"} 
+                  message2={
+                    error ? error.message : 
+                    pathname === "/manage" ? authMessage.manage :
+                    pathname === "/wishlist" ? authMessage.wishlist :
+                    pathname === "/cart" ? authMessage.cart :
+                    pathname === "/orders" ? authMessage.orders :
+                    pathname === "/add" ? authMessage.add: null
+                  }
+                />
 
               <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event, signin)}>
                 <input 
