@@ -8,6 +8,8 @@ import { CURRENT_USER_QUERY } from '../User/User';
 import Form from '../styles/Form';
 import PageInfo from '../PageInfo/PageInfo';
 import { Center } from './SignupStyles';
+import Spinner from '../Spinner/Spinner';
+import formatError from '../../lib/formatError';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($username: String!, $email: String!, $password: String!) {
@@ -50,11 +52,18 @@ const Signup = () => {
       refetchQueries={[{ query: CURRENT_USER_QUERY}]}
     >
       {
-        (signup, { data, loading }) => {
-          console.log(user);
+        (signup, { data, loading, error }) => {
+
+          if (loading) return (
+            <>
+              <PageInfo message1="Signing Up..." />
+              <Spinner />
+            </>
+          );
+          
           return (
             <>
-            <PageInfo message1="Sign up" message2="" />
+            <PageInfo message1="Sign up" message2={formatError(error && error.message)} />
               <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event, signup)}>
                 <input 
                   type="text" 

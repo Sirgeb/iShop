@@ -3,11 +3,13 @@ import { Mutation } from 'react-apollo';
 import Router from 'next/router';
 import gql from 'graphql-tag';
 import Link from 'next/link';
-import { CURRENT_USER_QUERY } from '../User/User';
 
+import { CURRENT_USER_QUERY } from '../User/User';
 import Form from '../styles/Form';
 import PageInfo from '../PageInfo/PageInfo';
 import { Center } from './SigninStyles';
+import Spinner from '../Spinner/Spinner';
+import formatError from '../../lib/formatError';
 
 const SIGN_IN_MUTATION = gql`
   mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
@@ -55,14 +57,19 @@ const Signin = ({ pathname }) => {
       {
         (signin, { data, loading, error }) => {
 
-          if (loading) console.log(loading);
+          if (loading) return (
+            <>
+              <PageInfo message1="Signing In..." />
+              <Spinner />
+            </>
+          );
           
           return (
             <> 
               <PageInfo 
                   message1={"Sign into your account"} 
                   message2={
-                    error ? error.message : 
+                    error ? formatError(error.message) : 
                     pathname === "/manage" ? authMessage.manage :
                     pathname === "/wishlist" ? authMessage.wishlist :
                     pathname === "/cart" ? authMessage.cart :
