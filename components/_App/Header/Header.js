@@ -5,6 +5,7 @@ import Router from 'next/router';
 import NProgress from 'nprogress';
 
 import Nav from '../../Nav/Nav';
+import Search from '../../Search/Search';
 
 Router.onRouteChangeStart = () => NProgress.start();
 Router.onRouteChangeComplete = () => NProgress.done();
@@ -22,10 +23,7 @@ const Header = () => {
             </a>
           </Link>
         </div>
-
-        <div className="search">
-          <input type="search" name="search" autoFocus placeholder="What do you want to buy?"/>
-        </div>
+        <Search />
       </div>
       <Nav />
     </HeaderStyles>

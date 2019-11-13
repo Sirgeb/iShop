@@ -38,27 +38,6 @@ const HeaderStyles = styled.div`
     font-size: 24px;
   }
 
-  .wrapper .search {
-    display: flex;
-    flex: 4;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .wrapper .search input[type=search] {
-    display: flex;
-    flex: 1;
-    padding: 10px;
-    font-size: 17px;
-    border: 0px;
-    border-right: 3px solid teal;
-    border-left: 3px solid teal;
-    outline: none;
-    font-stretch: wider;
-    background: #f1f1f1;
-    font-family: 'Oswald', sans-serif;
-  }
-
   @media (max-width: 700px) {
     display: flex;
     position: relative;
