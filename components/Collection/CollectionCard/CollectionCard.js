@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 import formatMoney from '../../../lib/formatMoney';
+import AddToCart from '../../Cart/AddToCart';
+import AddToWishlist from '../../Wishlist/AddToWishlist';
 
 import CollectionCardStyles from './CollectionCardStyles';
 
-const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent, onCollectionPreview }) => {
-
+const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent, onCollectionPreview, wishlist }) => {
   return (
     <CollectionCardStyles hide={onCollectionPreview}>
         <div className="card-image-and-amount-wrapper">
@@ -25,8 +26,8 @@ const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent
               <div className="item-name">
                 {itemName}
               </div>
-              <button className="add-to-wishlist btn"><i className="fas fa-heart icon active" ></i></button>
-              <button className="add-to-cart btn">Add to Cart</button>
+              <AddToWishlist id={id} wishlist={wishlist} />
+              <AddToCart id={id}/>
             </div>
           <div className="bottom">
               <span className="discount-percent">-{discountPercent}%</span>

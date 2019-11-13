@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 
+import Counter from '../Counter/Counter';
 import User from '../User/User';
 import Signout from '../Signout/Signout';
 import Spinner from '../Spinner/Spinner';
@@ -13,9 +14,7 @@ const Nav = () => {
     <User>
       {
         ({ data, loading }) => {
-
-          console.log(data)
-
+          console.log(data);
           if (loading) return <Spinner spacing="600px"/>
         
           return (
@@ -28,12 +27,18 @@ const Nav = () => {
                 </li>
                     <li>
                       <Link href="/wishlist">
-                        <a><i className="fas fa-heart icon"></i><span>0</span></a>
+                        <a><i className="fas fa-heart icon"></i><span>
+                          <Counter count={ data.me !== null ? data.me.wishlist.length : 0 } />
+                          </span></a>
                       </Link>
                     </li>
                     <li>
                       <Link href="/cart">
-                        <a><i className="fas fa-shopping-cart icon"></i><span>0</span></a>
+                        <a><i className="fas fa-shopping-cart icon"></i><span>
+                        <Counter 
+                          count={ data.me !== null ? data.me.cart.reduce((tally, cartItem) => tally + cartItem.quantity, 0) : 0 } 
+                        />
+                        </span></a>
                       </Link>
                     </li>
                     {
@@ -63,7 +68,7 @@ const Nav = () => {
                 }
                 {
                   data.me && (
-                    <li><Signout /></li>
+                    <li style={{padding: 20}}><Signout /></li>
                   )
                 }
               </ul>

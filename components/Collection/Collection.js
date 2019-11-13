@@ -6,56 +6,68 @@ import PageInfo from '../../components/PageInfo/PageInfo';
 import CollectionHeader from './CollectionHeader/CollectionHeader';
 import CollectionCard from './CollectionCard/CollectionCard';
 import Spinner from '../Spinner/Spinner';
+import User from '../User/User';
 
 import CollectionStyles from './CollectionStyles';
 
 const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview, spacing }) => {
 
   return ( 
-    <Query query={collectionQuery} >
+    <User>
       {
-        ({ data, loading }) => {
-          if (loading) {
-            return <Spinner spacing={spacing}/>
-          }
+        ({ data, loading, error}) => {
+
+          if (loading) return null;
 
           return (
-            <>
+            <Query query={collectionQuery} >
               {
-                !onCollectionPreview && (
-                  <PageInfo 
-                    message1={` ${formatText(data.items.length, collectionName)} `}
-                  />
-                )
+                ({ data, loading }) => {
+                  if (loading) {
+                    return <Spinner spacing={spacing}/>
+                  }
+
+                  return (
+                    <>
+                      {
+                        !onCollectionPreview && (
+                          <PageInfo 
+                            message1={` ${formatText(data.items.length, collectionName)} `}
+                          />
+                        )
+                      }
+                    
+                      {
+                        onCollectionPreview && (
+                          <CollectionHeader 
+                            currentItem={data.currentItem} 
+                            collectionName={collectionName} 
+                            pageLink={pageLink}
+                          />
+                        )
+                      }
+              
+                      <CollectionStyles>
+                          <div className="collection-items">
+                            {
+                              data.items.map(item => (
+                                <CollectionCard 
+                                  { ...item} key={item.id} onCollectionPreview={onCollectionPreview}
+                                />
+                              ))
+                            }
+                          </div>
+                      </CollectionStyles>
+                    </>
+                  )
+                }
               }
-            
-              {
-                onCollectionPreview && (
-                  <CollectionHeader 
-                    currentItem={data.currentItem} 
-                    collectionName={collectionName} 
-                    pageLink={pageLink}
-                  />
-                )
-              }
-      
-              <CollectionStyles>
-                  <div className="collection-items">
-                    {
-                      data.items.map(item => (
-                        <CollectionCard 
-                          { ...item} key={item.id} onCollectionPreview={onCollectionPreview}
-                        />
-                      ))
-                    }
-                  </div>
-              </CollectionStyles>
-            </>
+            </Query>
           )
         }
       }
-    </Query>
-  );
+  </User>
+  )
 }
 
 export default Collection;
