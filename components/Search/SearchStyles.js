@@ -4,6 +4,10 @@ const DropDown = styled.div`
   position: absolute;
   width: 300px;
   z-index: 2;
+
+  @media (max-width: 600px) {
+    max-width: 200px
+  }
 `;
 
 const DropDownItem = styled.div`
@@ -46,6 +50,11 @@ const SearchStyles = styled.div`
     font-stretch: wider;
     background: #f1f1f1;
     font-family: 'Oswald', sans-serif;
+  }
+  @media (max-width: 600px) {
+    input[type=search] {
+      max-width: 200px;
+    }
   }
 `;
 

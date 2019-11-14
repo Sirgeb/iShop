@@ -1,35 +1,71 @@
 import React from 'react';
 import WishlistStyles from './WishlistStyles';
+import Link from 'next/link';
+
+import PageInfo from '../PageInfo/PageInfo';
+import User from '../User/User';
+import formatMoney from '../../lib/formatMoney';
+import Spinner from '../Spinner/Spinner';
+import AddWishlistItemToCart from '../Wishlist/AddWishlistItemToCart';
 
 const Wishlist = () => {
 
   return ( 
-    <WishlistStyles>
-        <div className="collection-items">
+    <User>
+      {
+        ({data, loading, error}) => {
+          if (loading) return (
+            <>
+              <PageInfo message1={"Wishlist"} message2="" />
+              <Spinner spacing="200px" />
+            </>
+          )
 
-          <div className="collection-card">
-            <div className="card-image-and-amount-wrapper">
-                <div className="img-box">
-                    <img src="../static/images/items/2.jpg" alt="" />
-                </div>
-                <div className="amount">
-                    <span>$48.50</span>&nbsp; <s> $50 </s>
-                </div>
-            </div>
-            <div className="wrapper">
-              <div className="top">
-                  <div className="item-name">
-                    Long Sleeve
+          return (
+            <>
+            <PageInfo message1={"Wishlist"} 
+              message2={`You have ${data.me.wishlist.length} ${data.me.wishlist.length === 0 || data.me.wishlist.length === 1 ? "item": "items"} in your wishlist`}
+            />
+
+            <WishlistStyles>
+              <div className="collection-items">
+                {
+                  data.me.wishlist.map(wishlistItem => (
+                    <div className="collection-card" key={wishlistItem.id}>
+                    <div className="card-image-and-amount-wrapper">
+                    <Link href={{ pathname: '/item', query: {id: wishlistItem.item.id} }}>
+                      <a>
+                        <div className="img-box">
+                            <img src={wishlistItem.item.image1} alt={wishlistItem.item.itemName} />
+                        </div>
+                      </a>
+                    </Link>
+                      <div className="amount">
+                          <span>{formatMoney(wishlistItem.item.newPrice)}</span>&nbsp; 
+                          <s> {formatMoney(wishlistItem.item.amount)} </s>
+                      </div>
+                    </div>
+                    <div className="wrapper">
+                      <div className="top">
+                          <div className="item-name">
+                            {wishlistItem.item.itemName}
+                          </div>
+                          <AddWishlistItemToCart id={wishlistItem.item.id} wishlistItem={wishlistItem} />
+                        </div>
+                      <div className="bottom">
+                          <span className="discount-percent">-3%</span>
+                      </div>
+                    </div>
                   </div>
-                  <button className="add-to-cart btn">Add to Cart</button>
-                </div>
-              <div className="bottom">
-                  <span className="discount-percent">-3%</span>
+                  ))
+                }
               </div>
-            </div>
-          </div>
-        </div>
-    </WishlistStyles>
+          </WishlistStyles>
+          </>
+          )
+        }
+      }
+    </User>
   );
 }
 

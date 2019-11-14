@@ -46,7 +46,12 @@ const Signin = ({ pathname }) => {
       variables: { ...user}
     });
     setUser(INITIAL_STATE);
-    Router.push({ pathname: '/' });
+    
+    if (Router.pathname !== "/signin") {
+      Router.push({ pathname: Router.pathname });
+    } else {
+      Router.push({ pathname: "/"});
+    }
   }
 
   return (  
@@ -59,7 +64,7 @@ const Signin = ({ pathname }) => {
 
           if (loading) return (
             <>
-              <PageInfo message1="Signing In..." />
+              <PageInfo message1="Signing in..." />
               <Spinner />
             </>
           );
@@ -67,7 +72,7 @@ const Signin = ({ pathname }) => {
           return (
             <> 
               <PageInfo 
-                  message1={"Sign into your account"} 
+                  message1={"Sign in"} 
                   message2={
                     error ? formatError(error.message) : 
                     pathname === "/manage" ? authMessage.manage :
@@ -102,7 +107,7 @@ const Signin = ({ pathname }) => {
                 <div className="divider"></div>
 
                 <Center>
-                  <button type="submit">Login</button> 
+                  <button type="submit">Signin</button> 
                   <p>Don't have an account?&nbsp;
                     <Link href="/signup">
                       <a>Sign up</a>

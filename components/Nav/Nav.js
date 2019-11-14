@@ -14,7 +14,6 @@ const Nav = () => {
     <User>
       {
         ({ data, loading }) => {
-          console.log(data);
           if (loading) return <Spinner spacing="600px"/>
         
           return (
@@ -68,7 +67,7 @@ const Nav = () => {
                 }
                 {
                   data.me && (
-                    <li style={{padding: 20}}><Signout /></li>
+                    <li><Signout /></li>
                   )
                 }
               </ul>

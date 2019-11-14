@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SignoutStyles = styled.div`
   button {
-    margin: 0;
+    margin: 15px;
     border: none;
     background: none;
     outline: none;
@@ -13,6 +13,11 @@ const SignoutStyles = styled.div`
   button:hover {
     cursor: pointer;
     color: black;
+  }
+  @media (max-width: 700px) {
+    button {
+      margin: 0;
+    }
   }
 `;
 

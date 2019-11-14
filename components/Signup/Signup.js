@@ -56,7 +56,7 @@ const Signup = () => {
 
           if (loading) return (
             <>
-              <PageInfo message1="Signing Up..." />
+              <PageInfo message1="Signing up..." />
               <Spinner />
             </>
           );
