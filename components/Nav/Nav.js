@@ -14,7 +14,7 @@ const Nav = () => {
     <User>
       {
         ({ data, loading }) => {
-          if (loading) return <Spinner spacing="600px"/>
+          if (loading) return <Spinner hide={true} spacing="600px"/>
         
           return (
             <NavStyles>

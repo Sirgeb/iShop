@@ -12,34 +12,28 @@ const INCREASE_ITEM_MUTATION = gql`
   }
 `;
 
-class IncreaseItem extends React.Component {
+const IncreaseItem = ({ id }) => {
 
-  render() {
-    return (
-        <Mutation 
-              mutation={INCREASE_ITEM_MUTATION} 
-              variables={{id: this.props.id }} 
-              refetchQueries={[{ query: CURRENT_USER_QUERY}]}
-          >
-            {
-              (increaseItem, { loading, error }) => (
-                <button 
-                  disabled={loading}
-                  onClick={
-                    () => {
-                      increaseItem().catch(err => alert(err.message));
-                    }
-                  }
-                  >
-                  {
-                    loading ? <i className="fas fa-circle-notch fa-spin"></i> : "+"
-                  }
-                </button>
-              )
-            }
+  return (
+    <Mutation 
+          mutation={INCREASE_ITEM_MUTATION} 
+          variables={{id }} 
+          refetchQueries={[{ query: CURRENT_USER_QUERY}]}
+      >
+        {
+          (increaseItem, { loading }) => (
+            <button 
+              disabled={loading}
+              onClick={() => increaseItem().catch(err => alert(err.message))}
+              >
+              {
+                loading ? <i className="fas fa-circle-notch fa-spin"></i> : "+"
+              }
+            </button>
+          )
+        }
     </Mutation>
-    )
-  }
+  )
 }
 
 export default IncreaseItem;

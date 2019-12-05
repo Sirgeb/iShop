@@ -12,32 +12,27 @@ const DECREASE_ITEM_MUTATION = gql`
   }
 `;
 
-class DecreaseItem extends React.Component {
-
-  render() {
-    return <Mutation 
-              mutation={DECREASE_ITEM_MUTATION} 
-              variables={{id: this.props.id }} 
-              refetchQueries={[{ query: CURRENT_USER_QUERY}]}
-          >
-            {
-              (decreaseItem, { loading, error }) => (
-                <button 
-                  disabled={loading}
-                  onClick={
-                    () => {
-                      decreaseItem().catch(err => alert(err.message));
-                    }
-                  }
-                  >
-                  {
-                    loading ? <i className="fas fa-circle-notch fa-spin"></i> : "-"
-                  }
-                </button>
-              )
-            }
+const DecreaseItem = ({ id }) => {
+  return (
+    <Mutation 
+      mutation={DECREASE_ITEM_MUTATION} 
+      variables={{ id }} 
+      refetchQueries={[{ query: CURRENT_USER_QUERY}]}
+      >
+        {
+          (decreaseItem, { loading }) => (
+            <button 
+              disabled={loading}
+              onClick={ () => decreaseItem().catch(err => alert(err.message))}
+              >
+              {
+                loading ? <i className="fas fa-circle-notch fa-spin"></i> : "-"
+              }
+            </button>
+          )
+        }
     </Mutation>
-  }
+  )
 }
 
 export default DecreaseItem;

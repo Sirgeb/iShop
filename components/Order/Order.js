@@ -1,53 +1,87 @@
 import React from 'react';
+import { Query } from 'react-apollo';
+import moment from 'moment';
+import gql from 'graphql-tag';
 
+import formatMoney from '../../lib/formatMoney';
 import PageInfo from '../PageInfo/PageInfo';
+import Spinner from '../Spinner/Spinner';
+
 import OrderStyles from './OrderStyles';
+
+const USER_ORDERS_QUERY = gql`
+  query USER_ORDERS_QUERY {
+    orders(orderBy: createdAt_DESC) {
+      id 
+      total 
+      createdAt 
+      items {
+        id 
+        itemName
+        newPrice 
+        description
+        quantity 
+        image1
+      }
+    }
+  }
+`;
 
 const Order = () => {
 
   return (
-    <>
-      <PageInfo message1="Orders" message2="You have 1 Order" />
-      <OrderStyles>
-        <div className="accordion-wrapper">
-          <input id="abc" name="myaccordion" type="checkbox" />
-          <label htmlFor="abc">
-          <strong>•</strong> Date / Time
-          </label>
-          <div className="insidecontainer">
-            <p>  
-              <span>Order ID: </span>
-              <span>No of Items:</span>
-              <span>Grand Total:</span>
-            </p>
-            <div className="items-wrapper">
-                    <div className="item">
-                        <img src="./static/images/items/1.jpg" width="100" height="100" />
-                        <div className="item-details">
-                          <span>item name</span>
-                          <span> Quantity:</span>
-                        </div>
-                        <div className="item-details">
-                          <span>| Each: </span>
-                          <span>| Sub Total: </span>
-                        </div>
+    <Query query={USER_ORDERS_QUERY}>
+      {
+        ({ data, loading }) => {
+          if (loading) return <Spinner spacing="200px"/>
+
+          return (
+            <>
+            <PageInfo 
+              message1="Orders"
+              message2={`You have made ${data.orders.length} ${data.orders.length === 0 || data.orders.length === 1 ? 'Order' : 'Orders' }`}
+            />
+            <OrderStyles>
+              {
+                data.orders.map(order => (
+                  <div className="accordion-wrapper" key={order.id}>
+                  <input id={order.id} name="myaccordion" type="checkbox" />
+                  <label htmlFor={order.id}>
+                  <strong>•</strong> {moment(order.createdAt).add(24, 'hours').format('LLL')}
+                  </label>
+                  <div className="insidecontainer">
+                    <p>  
+                      <span> Order ID: {order.id} </span>
+                      <span> No of Items: {order.items.length} </span>
+                      <span> Grand Total: {formatMoney(order.total)} </span>
+                    </p>
+                    <div className="items-wrapper">
+                        {
+                          order.items.map(item => (
+                            <div className="item" key={item.id}>
+                                <img src={item.image1} alt={item.itemName} width="100" height="100" />
+                                <div className="item-details">
+                                  <span>Name: {item.itemName}</span>
+                                  <span>Quantity: {item.quantity}</span>
+                                </div>
+                                <div className="item-details">
+                                  <span>| Each: {formatMoney(item.newPrice)}</span>
+                                  <span>| Sub Total: {formatMoney(item.newPrice * item.quantity)}</span>
+                                </div>
+                            </div>
+                          ))
+                        }
+                      </div>
                     </div>
-                    <div className="item">
-                      <img src="./static/images/items/2.jpg" width="100" height="100"/>
-                      <div className="item-details">
-                        <span>item name</span>
-                        <span> Quantity:</span>
-                      </div>
-                      <div className="item-details">
-                        <span>| Each: </span>
-                        <span>| Sub Total: </span>
-                      </div>
                   </div>
-              </div>
-            </div>
-          </div>
-      </OrderStyles>
-    </>
+                ))
+              }
+            </OrderStyles>
+            </>
+          )
+        }
+      }
+    </Query>
   )
 };
 
