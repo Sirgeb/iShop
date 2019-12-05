@@ -7,6 +7,8 @@ import User from '../User/User';
 import Spinner from '../Spinner/Spinner';
 import formatMoney from '../../lib/formatMoney';
 import RemoveFromCart from './RemoveFromCart';
+import IncreaseItem from './IncreaseItem';
+import DecreaseItem from './DecreaseItem';
 
 const Cart = () => {
 
@@ -37,6 +39,9 @@ const Cart = () => {
                 </thead>
                 <tbody>
                   {
+                    loading && <Spinner />
+                  }
+                  {
                     data.me.cart.map(cartItem => (
                       <tr key={cartItem.id}>
                         <td><RemoveFromCart id={cartItem.id}/></td>
@@ -46,7 +51,7 @@ const Cart = () => {
                         <td> {cartItem.item.itemName} </td>
                         <td>
                           <div className="cell-content-wrapper">
-                            <button>-</button> <button>5</button> <button>+</button>
+                            <DecreaseItem id={cartItem.item.id} /> <button>{cartItem.quantity}</button> <IncreaseItem id={cartItem.item.id} />
                           </div>
                         </td>
                         <td>{formatMoney(cartItem.item.newPrice)}</td>

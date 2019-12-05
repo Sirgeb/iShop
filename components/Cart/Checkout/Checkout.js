@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import formatMoney from '../../../lib/formatMoney';
 import calcTotalPrice from '../../../lib/calcTotalPrice';
+import PayNow from '../PayNow';
 import CheckoutStlyles from './CheckoutStyles';
 
 const Checkout = ({ cartItems }) => {
@@ -24,7 +25,7 @@ const Checkout = ({ cartItems }) => {
             cartItems.map(cartItem => (
               <li key={cartItem.item.id}>
                 <span>{cartItem.item.itemName} x {cartItem.quantity} </span>
-                <span className="amount">{formatMoney(cartItem.item.newPrice)}</span>
+                <span className="amount">{formatMoney(cartItem.item.newPrice * cartItem.quantity)}</span>
               </li>
             ))
           }
@@ -33,9 +34,11 @@ const Checkout = ({ cartItems }) => {
             <span className="amount"><strong>{formatMoney(calcTotalPrice(cartItems))}</strong></span>
           </li>
         </ul>
+        <PayNow>
           <button className="btn">
-            Pay Now
+            { cartItems.length ? "Pay Now" : null }
           </button>
+        </PayNow>
       </div>
   </CheckoutStlyles>
   )
