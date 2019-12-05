@@ -1,9 +1,9 @@
 import React from 'react';
 import { ApolloConsumer } from 'react-apollo';
 import gql from 'graphql-tag';
+import debounce from 'lodash.debounce';
 import Downshift, { resetIdCounter } from 'downshift';
 import Router from 'next/router';
-import debounce from 'lodash.debounce';
 import  { DropDown, DropDownItem, SearchStyles } from './SearchStyles';
 import formatMoney from '../../lib/formatMoney';
 
