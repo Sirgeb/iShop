@@ -1,7 +1,9 @@
 import React from 'react';
 import gql from 'graphql-tag';
+import { withRouter } from 'next/router';
 
 import Collection from '../../components/Collection/Collection';
+import { perPage } from '../../configs';
 import Pagination from '../../components/Pagination/Pagination';
 
 const WRIST_WATCH_COLLECTION_QUERY = gql`
@@ -23,7 +25,19 @@ query {
   }
 `;
 
-const WristWatch = () => {
+const PAGINATION_QUERY = gql`
+query PAGINATION_QUERY {
+  itemsConnection(where: {
+    category: WRISTWATCH
+  }) {
+    aggregate {
+      count
+    }
+  }
+}
+`;
+
+const WristWatch = ({ query, router }) => {
 
   return (
     <>
@@ -32,9 +46,16 @@ const WristWatch = () => {
         collectionQuery={WRIST_WATCH_COLLECTION_QUERY}
         spacing="200px"
       />
-      <Pagination />
+
+      <Pagination 
+        PAGINATION_QUERY={PAGINATION_QUERY}
+        page={parseFloat(query.page) || 1}
+        pathname={router.pathname}
+        perPage={perPage}
+        collection="Wrist Watch"
+      />
     </>
   );
 }
 
-export default WristWatch;
+export default withRouter(WristWatch);

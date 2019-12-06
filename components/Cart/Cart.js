@@ -39,9 +39,6 @@ const Cart = () => {
                 </thead>
                 <tbody>
                   {
-                    loading && <Spinner />
-                  }
-                  {
                     data.me.cart.map(cartItem => (
                       <tr key={cartItem.id}>
                         <td><RemoveFromCart id={cartItem.id}/></td>

@@ -1,7 +1,9 @@
 import React from 'react';
 import gql from 'graphql-tag';
+import { withRouter } from 'next/router';
 
 import Collection from '../../components/Collection/Collection';
+import { perPage } from '../../configs';
 import Pagination from '../../components/Pagination/Pagination';
 
 const SHOE_COLLECTION_QUERY = gql`
@@ -23,7 +25,19 @@ query {
   }
 `;
 
-const Shoe = () => {
+const PAGINATION_QUERY = gql`
+query PAGINATION_QUERY {
+  itemsConnection(where: {
+    category: SHOE
+  }) {
+    aggregate {
+      count
+    }
+  }
+}
+`;
+
+const Shoe = ({ query, router }) => {
 
   return (
     <>
@@ -32,9 +46,16 @@ const Shoe = () => {
         collectionQuery={SHOE_COLLECTION_QUERY}
         spacing="200px"
       />
-      <Pagination />
+
+      <Pagination 
+        PAGINATION_QUERY={PAGINATION_QUERY}
+        page={parseFloat(query.page) || 1}
+        pathname={router.pathname}
+        perPage={perPage}
+        collection="Shoe"
+      />
     </>
   );
 }
 
-export default Shoe;
+export default withRouter(Shoe);

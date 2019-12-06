@@ -5,6 +5,7 @@ import formatText from '../../lib/formatText';
 import PageInfo from '../../components/PageInfo/PageInfo';
 import CollectionHeader from './CollectionHeader/CollectionHeader';
 import CollectionCard from './CollectionCard/CollectionCard';
+import Spinner from '../Spinner/Spinner';
 import User from '../User/User';
 
 import CollectionStyles from './CollectionStyles';
@@ -22,7 +23,7 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
             <Query query={collectionQuery} >
               {
                 ({ data, loading }) => {
-                  if (loading) return null;
+                  if (loading) return <Spinner spacing="200px" />;
 
                   return (
                     <>
