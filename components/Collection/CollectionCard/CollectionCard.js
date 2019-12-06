@@ -6,7 +6,7 @@ import AddToWishlist from '../../Wishlist/AddToWishlist';
 
 import CollectionCardStyles from './CollectionCardStyles';
 
-const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent, onCollectionPreview, wishlist }) => {
+const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent, onCollectionPreview, me }) => {
   return (
     <CollectionCardStyles hide={onCollectionPreview}>
         <div className="card-image-and-amount-wrapper">
@@ -26,7 +26,7 @@ const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent
               <div className="item-name">
                 {itemName}
               </div>
-              <AddToWishlist id={id} wishlist={wishlist} />
+              <AddToWishlist id={id} wishlist={me && me.wishlist} />
               <AddToCart id={id}/>
             </div>
           <div className="bottom">

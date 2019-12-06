@@ -15,9 +15,11 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
   return ( 
     <User>
       {
-        ({ data, loading, error}) => {
+        ({ data, loading}) => {
 
           if (loading) return null;
+
+          const me = data.me;
 
           return (
             <Query query={collectionQuery} variables={variables}>
@@ -50,7 +52,7 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
                             {
                               data.items.map(item => (
                                 <CollectionCard 
-                                  { ...item} key={item.id} onCollectionPreview={onCollectionPreview}
+                                  { ...item} key={item.id} me={me} onCollectionPreview={onCollectionPreview}
                                 />
                               ))
                             }

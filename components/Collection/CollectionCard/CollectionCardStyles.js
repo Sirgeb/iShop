@@ -60,6 +60,10 @@ const CollectionCardStyles = styled.div`
     color: #eb4b84;
   }
 
+  .active {
+    color:  #eb4b84;
+  }
+
   .add-to-cart {
     font-size: 14px;
   }
