@@ -10,7 +10,7 @@ import User from '../User/User';
 
 import CollectionStyles from './CollectionStyles';
 
-const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview }) => {
+const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview, variables }) => {
 
   return ( 
     <User>
@@ -20,7 +20,7 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
           if (loading) return null;
 
           return (
-            <Query query={collectionQuery} >
+            <Query query={collectionQuery} variables={variables}>
               {
                 ({ data, loading }) => {
                   if (loading) return <Spinner spacing="200px" />;
@@ -30,7 +30,7 @@ const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPre
                       {
                         !onCollectionPreview && (
                           <PageInfo 
-                            message1={` ${formatText(data.items.length, collectionName)} `}
+                            message1={` ${formatText(data.currentItem.length, collectionName)} `}
                           />
                         )
                       }

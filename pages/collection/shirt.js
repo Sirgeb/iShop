@@ -7,8 +7,10 @@ import { perPage } from '../../configs';
 import Pagination from '../../components/Pagination/Pagination';
 
 const SHIRT_COLLECTION_QUERY = gql`
-query {
-    items(where: { category: SHIRT }, orderBy: createdAt_DESC) {
+  query ($skip: Int = 0, $first: Int = ${perPage}){
+    items(where: {
+      category: SHIRT
+    }, first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       itemName
       discountPercent
@@ -44,6 +46,9 @@ const Shirt = ({ query, router }) => {
       <Collection 
         collectionName="Shirt"
         collectionQuery={SHIRT_COLLECTION_QUERY}
+        variables={{
+          skip: parseFloat(query.page) * perPage - perPage,
+        }}
         spacing="200px"
       />
 

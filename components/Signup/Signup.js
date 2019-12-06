@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import Link from 'next/link';
 import Router from 'next/router';
 import gql from 'graphql-tag';
+import Head from 'next/head';
 
 import { CURRENT_USER_QUERY } from '../User/User';
 import Form from '../styles/Form';
@@ -63,6 +64,9 @@ const Signup = () => {
           
           return (
             <>
+            <Head>
+              <title>iShop | Sign up </title>
+            </Head>
             <PageInfo message1="Sign up" message2={formatError(error && error.message)} />
               <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event, signup)}>
                 <input 

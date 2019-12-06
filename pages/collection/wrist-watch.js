@@ -7,8 +7,10 @@ import { perPage } from '../../configs';
 import Pagination from '../../components/Pagination/Pagination';
 
 const WRIST_WATCH_COLLECTION_QUERY = gql`
-query {
-    items(where: { category: WRISTWATCH }, first: 5, orderBy: createdAt_DESC) {
+  query ($skip: Int = 0, $first: Int = ${perPage}){
+    items(where: {
+      category: WRISTWATCH
+    }, first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       itemName
       discountPercent
@@ -44,6 +46,9 @@ const WristWatch = ({ query, router }) => {
       <Collection 
         collectionName="Wrist Watch"
         collectionQuery={WRIST_WATCH_COLLECTION_QUERY}
+        variables={{
+          skip: parseFloat(query.page) * perPage - perPage,
+        }}
         spacing="200px"
       />
 

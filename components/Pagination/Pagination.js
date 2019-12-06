@@ -22,7 +22,7 @@ const Pagination = ({ PAGINATION_QUERY, perPage, collection, page, pathname }) =
             <PaginationStyles>
               <div className="wrap">
                 <Link href={{
-                  pathname,
+                  pathname: pathname,
                   query: { page: page - 1}
                 }}>
                   <a className="prev" aria-disabled={page <= 1}>← Prev</a>
@@ -31,7 +31,7 @@ const Pagination = ({ PAGINATION_QUERY, perPage, collection, page, pathname }) =
                       Page {page} of {pages}
                   </p>
                 <Link href={{
-                  pathname,
+                  pathname: pathname,
                   query: { page: page + 1 }
                 }}>
                   <a className="next" aria-disabled={page >= pages}>Next →</a>

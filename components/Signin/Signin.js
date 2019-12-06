@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import Router from 'next/router';
 import gql from 'graphql-tag';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import { CURRENT_USER_QUERY } from '../User/User';
 import Form from '../styles/Form';
@@ -58,7 +59,6 @@ const Signin = ({ pathname }) => {
     <Mutation 
       mutation={SIGN_IN_MUTATION}
       refetchQueries={[{ query: CURRENT_USER_QUERY}]}> 
-
       {
         (signin, { data, loading, error }) => {
 
@@ -71,6 +71,9 @@ const Signin = ({ pathname }) => {
           
           return (
             <> 
+              <Head>
+                <title>iShop | Sign in </title>
+              </Head>
               <PageInfo 
                   message1={"Sign in"} 
                   message2={

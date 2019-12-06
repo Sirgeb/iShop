@@ -7,8 +7,10 @@ import { perPage } from '../../configs';
 import Pagination from '../../components/Pagination/Pagination';
 
 const DEVICE_COLLECTION_QUERY = gql`
-query {
-    items(where: { category: DEVICE }, orderBy: createdAt_DESC) {
+  query ($skip: Int = 0, $first: Int = ${perPage}){
+    items(where: {
+      category: DEVICE
+    }, first: $first, skip: $skip, orderBy: createdAt_DESC) {
       id
       itemName
       discountPercent
@@ -44,6 +46,9 @@ const Device = ({ query, router}) => {
       <Collection
         collectionName="Device"
         collectionQuery={DEVICE_COLLECTION_QUERY}
+        variables={{
+          skip: parseFloat(query.page) * perPage - perPage,
+        }}
         spacing="200px"
        />
 

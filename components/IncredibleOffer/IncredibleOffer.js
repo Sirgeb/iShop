@@ -8,10 +8,10 @@ import formatMoney from '../../lib/formatMoney';
 import PageInfo from '../../components/PageInfo/PageInfo';
 import Spinner from '../Spinner/Spinner';
 
-const IncredibleOffer = ({ collectionQuery, onCollectionPreview, spacing }) => {
+const IncredibleOffer = ({ collectionQuery,  variables, onCollectionPreview, spacing }) => {
 
   return (
-    <Query query={collectionQuery}>
+    <Query query={collectionQuery} variables={variables}>
       {
         ({ data, loading }) => {
 
@@ -21,7 +21,10 @@ const IncredibleOffer = ({ collectionQuery, onCollectionPreview, spacing }) => {
               <>
                 {
                   !onCollectionPreview && (
-                    <PageInfo message1="Incredible Offer" message2={`We have ${data.items.length} items for you`} />
+                    <PageInfo 
+                      message1="Incredible Offer" 
+                      message2={`We have ${data.itemsInStore.length} items for you`} 
+                    />
                   )
                 }
 

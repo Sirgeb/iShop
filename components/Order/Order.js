@@ -2,6 +2,7 @@ import React from 'react';
 import { Query } from 'react-apollo';
 import moment from 'moment';
 import gql from 'graphql-tag';
+import Head from 'next/head';
 
 import formatMoney from '../../lib/formatMoney';
 import PageInfo from '../PageInfo/PageInfo';
@@ -37,6 +38,9 @@ const Order = () => {
 
           return (
             <>
+            <Head>
+              <title>iShop | Orders </title>
+            </Head>
             <PageInfo 
               message1="Orders"
               message2={`You have made ${data.orders.length} ${data.orders.length === 0 || data.orders.length === 1 ? 'Order' : 'Orders' }`}

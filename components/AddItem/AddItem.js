@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 
 import PageInfo from '../PageInfo/PageInfo';
 import Form from '../styles/Form';
@@ -7,6 +8,9 @@ const AddItem = () => {
 
   return (  
     <>
+    <Head>
+      <title>iShop | Add Item </title>
+    </Head>
     <PageInfo message1="Add an item" message2="" />
 
     <Form autoComplete="off">

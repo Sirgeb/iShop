@@ -1,12 +1,14 @@
 import React from 'react';
-import WishlistStyles from './WishlistStyles';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import PageInfo from '../PageInfo/PageInfo';
 import User from '../User/User';
 import formatMoney from '../../lib/formatMoney';
 import Spinner from '../Spinner/Spinner';
 import AddWishlistItemToCart from '../Wishlist/AddWishlistItemToCart';
+
+import WishlistStyles from './WishlistStyles';
 
 const Wishlist = () => {
 
@@ -23,6 +25,9 @@ const Wishlist = () => {
 
           return (
             <>
+            <Head>
+              <title>iShop | Wishlist</title>
+            </Head>
             <PageInfo message1={"Wishlist"} 
               message2={`You have ${data.me.wishlist.length} ${data.me.wishlist.length === 0 || data.me.wishlist.length === 1 ? "item": "items"} in your wishlist`}
             />

@@ -1,16 +1,19 @@
 import React from 'react';
 import Link from 'next/link';
+import Head from 'next/head';
 
 import PageInfo from '../PageInfo/PageInfo';
 import Table from '../styles/Table';
 import SearchItem from './SearchItem';
 import { AddItem, IconStyle } from './ManageStyles';
 
-
 const Manage = () => {
 
   return (
     <>
+      <Head>
+        <title>iShop | Manage </title>
+      </Head>
       <PageInfo message1="Manage" message2="1 item in Store" />
 
       <AddItem>

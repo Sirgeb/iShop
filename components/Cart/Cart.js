@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 
 import PageInfo from '../../components/PageInfo/PageInfo';
 import Checkout from './Checkout/Checkout';
@@ -23,6 +24,9 @@ const Cart = () => {
 
           return (
             <>
+            <Head>
+              <title>iShop | Shopping Cart </title>
+            </Head>
             <PageInfo 
               message1={"Shopping Cart"} 
               message2={`You have ${data.me.cart.length} ${data.me.cart.length === 0 || data.me.cart.length === 1 ? "item": "items"} in your cart`}
