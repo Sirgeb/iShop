@@ -12,7 +12,6 @@ const ADD_TO_WISHLIST_MUTATION = gql`
   }
 `;
 
-
 const AddToWishList = ({ id, wishlist }) => {
   let active = false;
 
@@ -25,7 +24,7 @@ const AddToWishList = ({ id, wishlist }) => {
         (addToWishList, { loading }) => (
           <button 
             title="Add To Wishlist"
-            className="add-to-wishlist btn"
+            className={`add-to-wishlist btn`}
             onClick={() => {
               return addToWishList().catch(err => alert(formatError(err.message)));
             }}
@@ -46,7 +45,7 @@ const AddToWishList = ({ id, wishlist }) => {
                             loading ? 
                              (<i className="fas fa-circle-notch fa-spin icon"></i>) 
                               :
-                             (<i className="fas fa-heart icon active"></i>)
+                             (<i className="fas fa-heart icon active"></i>) 
                           }
                         </div>
                       )

@@ -92,6 +92,7 @@ const ItemStyles = styled.div`
   .item li {
     padding-bottom: 20px;
     list-style: none;
+    width: 130px;
   }
 
   .content h2 {
@@ -109,6 +110,39 @@ const ItemStyles = styled.div`
     color: #393939;
   }
 
+  button {
+    border: none;
+    outline: none;
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background: teal;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  @media (max-width: 700px) {
+    button {
+      width: 120px;
+      font-size: 14px;
+    }
+    .icon {
+      font-size: 18px;
+    }
+  }
+  
+  .add-to-wishlist:hover {
+    color: #eb4b84;
+  }
+
+  .active {
+    color: #eb4b84;
+  }
 `;
 
 export default ItemStyles;

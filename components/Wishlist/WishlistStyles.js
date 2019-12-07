@@ -5,6 +5,7 @@ const WishlistStyle = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 10px;
+    margin-bottom: 30px;
   }
 
   .collection-items .collection-card {
