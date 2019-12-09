@@ -19,6 +19,7 @@ const PageInfoStyles = styled.div`
     font-weight: 700;
     letter-spacing: 8px;
     animation: text 3s 1;
+    text-align: center;
   }
 
   .message2 {
@@ -30,6 +31,7 @@ const PageInfoStyles = styled.div`
     margin-bottom: 10px;
     padding-top: 10px;
     animation: text 3s 1;
+    text-align: center;
   }
 
   @keyframes text {

@@ -1,53 +1,134 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import { withRouter } from 'next/router';
 
+import { perPage } from '../../configs';
 import PageInfo from '../PageInfo/PageInfo';
+import Pagination from '../Pagination/Pagination';
 import Table from '../styles/Table';
+import User from '../User/User';
 import SearchItem from './SearchItem';
-import { AddItem, IconStyle } from './ManageStyles';
+import { AddItem } from './ManageStyles';
+import Spinner from '../Spinner/Spinner';
+import StoreItem from './StoreItem';
 
-const Manage = () => {
+const ALL_ITEMS_QUERY = gql`
+  query ($skip: Int = 0, $first: Int = ${perPage}){
+    items (first: $first, skip: $skip, orderBy: createdAt_DESC) {
+      id
+      itemName
+      discountPercent
+      image1
+      newPrice
+    }
+
+    itemsInStore {
+      id
+    }
+  }
+`;
+
+const PAGINATION_QUERY = gql`
+  query PAGINATION_QUERY {
+    itemsConnection {
+      aggregate {
+        count
+      }
+    }
+  }
+`;
+
+const Manage = ({ page, router }) => {
+
+  const [items, setItems] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
 
   return (
     <>
-      <Head>
-        <title>iShop | Manage </title>
-      </Head>
-      <PageInfo message1="Manage" message2="1 item in Store" />
+    <User> 
+    {
+      ({ data, loading }) => {
+        if (loading) return null;
 
-      <AddItem>
-        <Link href="/add">
-          <a><i className="fas fa-plus"></i> Add an Item</a>
-        </Link>
-      </AddItem>
+        const me = data.me;
 
-      <SearchItem />
+        return <Query
+          query={ALL_ITEMS_QUERY}
+          fetchPolicy="network-only"
+          variables={{
+            skip: page * perPage - perPage,
+          }}
+        > 
+        {
+          ({ data, loading }) => {
+            if (loading) return <Spinner spacing="200px" />;
+            setItems(data.items);
 
-      <Table>
-        <thead>
-          <tr>
-            <th>Product</th>
-            <th>Name</th>
-            <th>Amount</th>
-            <th>Update</th>
-            <th>Remove</th>
-          </tr>
-        </thead>
-        <tbody>
-              <tr>
-                <td>
-                  <img src="./static/images/items/1.jpg" />
-                </td>
-                <td> Black Shirt </td>
-                <td>$8000</td>
-                <td><IconStyle><i className="fas fa-pen-square icon update"></i></IconStyle></td>
-                <td><IconStyle><i className="fas fa-trash-alt icon remove"></i></IconStyle></td>
-             </tr>
-        </tbody>
-      </Table>
+            return <>
+              <Head>
+                <title>iShop | Manage </title>
+              </Head>
+              <PageInfo 
+                message1="Manage" 
+                message2={`${me ? "Sorry, You don't have privilegde to manage store": "item in Store"}`} 
+              />
+      
+              <AddItem>
+                <Link href="/add">
+                  <a><i className="fas fa-plus"></i> Add an Item</a>
+                </Link>
+              </AddItem>
+      
+              <SearchItem setItems={(items) => setSearchResult(items)}/>
+      
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Update</th>
+                    <th>Remove</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {
+                    searchResult.length !== 0 ? 
+                      <>
+                          {searchResult.map(item => <StoreItem key={item.id} { ...item } />)}
+                      </>
+                    : 
+                      <>
+                          {items.map(item => <StoreItem key={item.id} { ...item } />)}
+                      </>
+                  }
+                </tbody>
+              </Table>
+              {
+                searchResult && <div style={{ marginBottom: 40 }} />
+              }
+              { 
+                (searchResult.length === 0 && !loading) && 
+                  <Pagination 
+                    PAGINATION_QUERY={PAGINATION_QUERY} 
+                    page={page} 
+                    pathname={router.pathname}
+                    perPage={perPage}
+                  />
+              }
+            </>
+          }
+        }
+        </Query>
+       
+      }
+    }
+    </User>
     </>
   )
 }
 
-export default Manage;
+export default withRouter(Manage);
