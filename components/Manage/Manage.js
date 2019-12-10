@@ -52,8 +52,7 @@ const Manage = ({ page, router }) => {
     {
       ({ data, loading }) => {
         if (loading) return null;
-
-        const me = data.me;
+        const admin = data.me.permissions.length > 1;
 
         return <Query
           query={ALL_ITEMS_QUERY}
@@ -73,11 +72,17 @@ const Manage = ({ page, router }) => {
               </Head>
               <PageInfo 
                 message1="Manage" 
-                message2={`${me ? "Sorry, You don't have privilegde to manage store": "item in Store"}`} 
+                message2={`   
+                  ${!admin ? 
+                    `Sorry, you don't have permission to manage store`
+                    : 
+                   `${data.itemsInStore.length} 
+                   ${data.itemsInStore.length === 0 || data.itemsInStore.length === 1 ?
+                   "item": "items"} in  store`}`} 
               />
       
               <AddItem>
-                <Link href="/add">
+                <Link href={`${!admin ? "#" : "/add"}`}>
                   <a><i className="fas fa-plus"></i> Add an Item</a>
                 </Link>
               </AddItem>
@@ -98,11 +103,11 @@ const Manage = ({ page, router }) => {
                   {
                     searchResult.length !== 0 ? 
                       <>
-                          {searchResult.map(item => <StoreItem key={item.id} { ...item } />)}
+                          {searchResult.map(item => <StoreItem key={item.id} admin={admin} { ...item } />)}
                       </>
                     : 
                       <>
-                          {items.map(item => <StoreItem key={item.id} { ...item } />)}
+                          {items.map(item => <StoreItem key={item.id} admin={admin} { ...item } />)}
                       </>
                   }
                 </tbody>
@@ -117,6 +122,7 @@ const Manage = ({ page, router }) => {
                     page={page} 
                     pathname={router.pathname}
                     perPage={perPage}
+                    collection="Items"
                   />
               }
             </>
@@ -131,4 +137,5 @@ const Manage = ({ page, router }) => {
   )
 }
 
+export { ALL_ITEMS_QUERY };
 export default withRouter(Manage);

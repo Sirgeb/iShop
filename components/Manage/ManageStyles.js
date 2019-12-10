@@ -6,6 +6,7 @@ export const AddItem = styled.div`
   align-items: center;
   margin-bottom: 10px;
   font-size: 18px;
+  color: #393939;
 
   a {
     color: teal;
@@ -15,6 +16,11 @@ export const AddItem = styled.div`
 
 export const IconStyle = styled.div`
   cursor: pointer;
+  color: #393939;
+
+  a {
+    color: #393939;
+  }
 
   .update:hover {
     color: teal;

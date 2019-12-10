@@ -22,12 +22,19 @@ const Checkout = ({ cartItems }) => {
         <h2>Cart Summary</h2>
         <ul>
           {
-            cartItems.map(cartItem => (
-              <li key={cartItem.item.id}>
-                <span>{cartItem.item.itemName} x {cartItem.quantity} </span>
-                <span className="amount">{formatMoney(cartItem.item.newPrice * cartItem.quantity)}</span>
-              </li>
-            ))
+            cartItems.map(cartItem => {
+              if (!cartItem.item) return (
+                <li>
+                  <span>This item has been removed</span>
+                </li> 
+              )
+              return (
+                <li key={cartItem.item.id}>
+                  <span>{cartItem.item.itemName} x {cartItem.quantity} </span>
+                  <span className="amount">{formatMoney(cartItem.item.newPrice * cartItem.quantity)}</span>
+                </li>
+             )} 
+            )
           }
           <li className="top-border">
             <span><strong>Total:</strong></span>

@@ -42,8 +42,14 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
+                  
                   {
-                    data.me.cart.map(cartItem => (
+                    data.me.cart.map(cartItem =>  {
+                      if (!cartItem.item) return  <tr>
+                      <td><RemoveFromCart id={cartItem.id}/></td>
+                        <td colSpan={4} style={{fontSize: 20}}>This item has been removed</td>
+                      </tr> 
+                      return (
                       <tr key={cartItem.id}>
                         <td><RemoveFromCart id={cartItem.id}/></td>
                         <td>
@@ -57,7 +63,7 @@ const Cart = () => {
                         </td>
                         <td>{formatMoney(cartItem.item.newPrice)}</td>
                     </tr>
-                    ))
+                    )})
                   }
                 </tbody>
               </Table>
