@@ -25,7 +25,8 @@ const SpinnerStyles = styled.div`
     width: 64px;
     height: 64px;
     border-radius: 64px;
-    color: ${props => props.hide ? "#ffffff" : "#323b40"};
+    color: "#323b40";
+    visibility: ${props => props.hide && "hidden"};
     box-shadow: inset -5px 0 0 5px currentColor;
     clip: rect(0, 64px, 32px, 0);
     animation: rotator 1s infinite linear;

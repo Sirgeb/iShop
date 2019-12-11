@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const SignoutStyles = styled.div`
   button {
-    margin: 15px;
+    margin: 15px 0;
     border: none;
     background: none;
     outline: none;

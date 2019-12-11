@@ -6,7 +6,26 @@ const NavStyles = styled.div`
   flex: 4;
   justify-content: center;
   align-items: center;
-  
+
+  @media(max-width: 700px) {
+    align-items: flex-start;
+    height: 110px;
+    .mb {
+      padding: 5px 0;
+      margin-bottom:30px;
+    }
+    .counter {
+      position: absolute;
+      top: 5px;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .side-space {
+      padding-right: 10px;
+      padding-left: 10px;
+    }
+  }
 
   ul {
     display: flex;
@@ -44,8 +63,6 @@ const NavStyles = styled.div`
     left: 0;
     scroll-behavior: smooth;
     overflow: scroll;
-    padding-bottom: 5px;
-    padding-top: 5px;
     background: white;
   
 

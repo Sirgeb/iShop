@@ -9,6 +9,10 @@ const PageInfoStyles = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background: linear-gradient(0deg, #3a414c, transparent);
 
+  @media (max-width: 700px) {
+    z-index: 10;
+  }
+
   .message1 {
     display: flex;
     justify-content: center;
