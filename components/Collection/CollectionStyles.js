@@ -5,6 +5,11 @@ const CollectionStyles = styled.div`
   flex-direction: column;
   margin-bottom: 20px;
 
+  @media (max-width: 1000px) {
+    justify-content: center;
+    align-items: center;
+  }
+
   .collection-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

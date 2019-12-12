@@ -9,7 +9,11 @@ const IncredibleOfferStyles = styled.div`
   padding: 0;
   margin-bottom: 20px;
 
-
+  @media (max-width: 1000px) {
+    justify-content: center;
+    align-items: center;
+  }
+  
   .card {
     display: grid;
     justify-content: center;

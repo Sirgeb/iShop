@@ -6,10 +6,11 @@ const NavStyles = styled.div`
   flex: 4;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   @media(max-width: 700px) {
     align-items: flex-start;
-    height: 110px;
+    height: 65px;
     .mb {
       padding: 5px 0;
       margin-bottom:30px;
@@ -62,7 +63,7 @@ const NavStyles = styled.div`
     top: 95px;
     left: 0;
     scroll-behavior: smooth;
-    overflow: scroll;
+    overflow: hidden;
     background: white;
   
 
@@ -76,12 +77,6 @@ const NavStyles = styled.div`
 
     .icon {
       font-size: 30px;
-    }
-  }
-
-  @media (max-width: 400px) {
-    ul li:first-child {
-      margin-left: 70px;
     }
   }
 `;

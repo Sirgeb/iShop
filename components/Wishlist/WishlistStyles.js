@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
 const WishlistStyle = styled.div`
+  @media (max-width: 1000px) {
+    justify-content: center;
+    align-items: center;
+  }
+
   .collection-items {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

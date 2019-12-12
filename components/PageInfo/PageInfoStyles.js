@@ -10,7 +10,7 @@ const PageInfoStyles = styled.div`
   background: linear-gradient(0deg, #3a414c, transparent);
 
   @media (max-width: 700px) {
-    z-index: 10;
+    z-index: 1;
   }
 
   .message1 {

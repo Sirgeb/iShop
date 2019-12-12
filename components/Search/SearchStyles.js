@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const DropDown = styled.div`
   position: absolute;
   width: 300px;
-  z-index: 2;
+  z-index: 5;
 
   @media (max-width: 600px) {
     max-width: 200px
