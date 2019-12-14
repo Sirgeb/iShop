@@ -52,23 +52,42 @@ const AddItem = () => {
   function handleChange(event) {
     const { name, type, value } = event.target;
     const val = type === 'number' ? parseFloat(value) : value;
-    name === 'discountPercent' ? getDiscountAmount(item.amount, value): null;
-    
-    setItem((prevState) => ({
-      ...prevState,
-      [name]: val
-    }));
+
+    if (name === 'amount') {  
+      if (item.discountPercent !== 0) {
+        const discountAmount = value * (item.discountPercent/100);
+        const newPrice = value - parseInt(discountAmount);
+        
+        setItem((prevState) => ({
+          ...prevState,
+          amount: value,
+          newPrice
+        }));
+      } else {
+        setItem((prevState) => ({
+          ...prevState,
+          amount: value,
+          newPrice: value,
+        }));
+      }
+    } else if ( name === 'discountPercent') {
+      const discountAmount = item.amount * (value/100);
+      const newPrice = item.amount - parseInt(discountAmount);
+
+      setItem((prevState) => ({
+        ...prevState,
+        discountPercent: value,
+        newPrice
+      }));
+
+    } else {
+      setItem((prevState) => ({
+        ...prevState,
+        [name]: val,
+      }));
+    }
   }
 
-  function getDiscountAmount(amount, discountPercent) {
-    const discountAmount = amount * (discountPercent/100);
-    const newPrice = amount - parseInt(discountAmount);
-    setItem((prevState) => ({
-      ...prevState,
-      newPrice
-    }));
-  }
-  
   async function uploadFile(e) {
     const imageName = e.target.name;
     const files = e.target.files;
