@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import PageInfo from '../components/PageInfo/PageInfo';
 import IncredibleOffer from '../components/IncredibleOffer/IncredibleOffer';
 import Collection from '../components/Collection/Collection';
+import Footer from '../components/Footer/Footer';
 
 const BAG_COLLECTION_QUERY = gql`
 query {
@@ -162,6 +163,8 @@ const Home = () => {
         collectionQuery={SHOE_COLLECTION_QUERY}
         onCollectionPreview={true}
       />
+
+      <Footer />
     </>
   )
 }

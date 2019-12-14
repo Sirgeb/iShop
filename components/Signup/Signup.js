@@ -110,6 +110,7 @@ const Signup = () => {
                     </Link>
                   </p>
                 </Center>
+                <div className="divider"></div>
               </Form>
             </>
           )
