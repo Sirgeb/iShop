@@ -6,7 +6,7 @@ import FooterStyles from './FooterStyles';
 const Footer = () => {
   return (
     <FooterStyles>
-      iShop is designed and developed by&nbsp;
+      iShop - Designed and developed by&nbsp;
       <Link prefetch={false} href="https://www.linkedin.com/in/gabriel-aniora/"> 
         <a target="_blank" title="My Profile Link">Sirgeb</a> 
       </Link>
