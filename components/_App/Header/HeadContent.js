@@ -15,6 +15,7 @@ const HeadContent = () => (
       gtag('js', new Date());
       gtag('config', 'UA-154478998-1');`
     }}></script>
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <title>iShop | Home of Quality Items</title>
   </Head>
 );

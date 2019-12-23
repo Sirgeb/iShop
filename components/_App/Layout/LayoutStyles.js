@@ -27,5 +27,11 @@ export const GlobalStyle = createGlobalStyle`
   .icon {
     font-size: 40px;
   }
+
+  .center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 

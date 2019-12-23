@@ -27,11 +27,26 @@ const Cart = () => {
             <Head>
               <title>iShop | Shopping Cart </title>
             </Head>
+            
             <PageInfo 
               message1={"Shopping Cart"} 
               message2={`You have ${data.me.cart.length} ${data.me.cart.length === 0 || data.me.cart.length === 1 ? "item": "items"} in your cart`}
             />
-              <Table>
+            {
+              data.me.cart.length === 0 ? 
+                <div className="center">
+                  <lottie-player
+                    src="https://assets2.lottiefiles.com/temp/lf20_jzqS18.json"  
+                    background="transparent"  
+                    speed="1"  
+                    className={{ width: "250px", height: "250px"}}
+                    loop  
+                    autoplay>
+                  </lottie-player>
+                </div>
+              : 
+              <>
+                <Table>
                 <thead>
                   <tr>
                     <th>Remove</th>
@@ -42,7 +57,6 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  
                   {
                     data.me.cart.map(cartItem =>  {
                       if (!cartItem.item) return  <tr>
@@ -67,7 +81,9 @@ const Cart = () => {
                   }
                 </tbody>
               </Table>
-            <Checkout cartItems={data.me.cart}/>
+              <Checkout cartItems={data.me.cart}/>
+              </>
+            }
             </>
           )
         }

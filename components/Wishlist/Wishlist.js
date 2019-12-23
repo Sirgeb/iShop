@@ -28,45 +28,59 @@ const Wishlist = () => {
             <Head>
               <title>iShop | Wishlist</title>
             </Head>
+
             <PageInfo message1={"Wishlist"} 
               message2={`You have ${data.me.wishlist.length} ${data.me.wishlist.length === 0 || data.me.wishlist.length === 1 ? "item": "items"} in your wishlist`}
             />
-
-            <WishlistStyles>
-              <div className="collection-items">
-                {
-                  data.me.wishlist.map(wishlistItem => (
-                    <div className="collection-card" key={wishlistItem.id}>
-                    <div className="card-image-and-amount-wrapper">
-                    <Link href={{ pathname: '/item', query: {id: wishlistItem.item.id} }}>
-                      <a>
-                        <div className="img-box">
-                            <img src={wishlistItem.item.image1} alt={wishlistItem.item.itemName} />
-                        </div>
-                      </a>
-                    </Link>
-                      <div className="amount">
-                          <span>{formatMoney(wishlistItem.item.newPrice)}</span>&nbsp; 
-                          <s> {formatMoney(wishlistItem.item.amount)} </s>
-                      </div>
-                    </div>
-                    <div className="wrapper">
-                      <div className="top">
-                          <div className="item-name">
-                            {wishlistItem.item.itemName}
-                          </div>
-                          <AddWishlistItemToCart id={wishlistItem.item.id} wishlistItem={wishlistItem} />
-                        </div>
-                      <div className="bottom">
-                          <span className="discount-percent">-3%</span>
-                      </div>
-                    </div>
+              {
+                data.me.wishlist.length === 0 ?
+                  <div className="center">
+                     <lottie-player
+                      src="https://assets7.lottiefiles.com/packages/lf20_8LS0Np.json"  
+                      background="transparent"  
+                      speed="1"  
+                      style={{ width: "250px", height: "250px" }} 
+                      loop  
+                      autoplay>
+                    </lottie-player>
                   </div>
-                  ))
-                }
-              </div>
-          </WishlistStyles>
-          </>
+                : 
+                  <WishlistStyles>
+                    <div className="collection-items">
+                      {
+                        data.me.wishlist.map(wishlistItem => (
+                          <div className="collection-card" key={wishlistItem.id}>
+                          <div className="card-image-and-amount-wrapper">
+                          <Link href={{ pathname: '/item', query: {id: wishlistItem.item.id} }}>
+                            <a>
+                              <div className="img-box">
+                                  <img src={wishlistItem.item.image1} alt={wishlistItem.item.itemName} />
+                              </div>
+                            </a>
+                          </Link>
+                            <div className="amount">
+                                <span>{formatMoney(wishlistItem.item.newPrice)}</span>&nbsp; 
+                                <s> {formatMoney(wishlistItem.item.amount)} </s>
+                            </div>
+                          </div>
+                          <div className="wrapper">
+                            <div className="top">
+                                <div className="item-name">
+                                  {wishlistItem.item.itemName}
+                                </div>
+                                <AddWishlistItemToCart id={wishlistItem.item.id} wishlistItem={wishlistItem} />
+                              </div>
+                            <div className="bottom">
+                                <span className="discount-percent">-3%</span>
+                            </div>
+                          </div>
+                        </div>
+                        ))
+                      }
+                    </div>
+                </WishlistStyles>
+              }
+            </>
           )
         }
       }
