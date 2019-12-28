@@ -5,6 +5,7 @@ import Link from 'next/link';
 import IncredibleOfferStyles from './IncredibleOfferStyles';
 import IncredibleOfferButtonLink from './IncredibleOfferButtonLink';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import PageInfo from '../../components/PageInfo/PageInfo';
 import Spinner from '../Spinner/Spinner';
 
@@ -39,7 +40,7 @@ const IncredibleOffer = ({ collectionQuery,  variables, onCollectionPreview, spa
                             </div>
                             <div className="content">
                               <div className="discount-percent">{item.discountPercent}% discount</div>
-                              <div className="item-name">{item.itemName}</div>
+                              <div className="item-name">{formatLetters(item.itemName)}</div>
                               <div className="amount"><s>{formatMoney(item.amount)}</s></div>
                               <div className="discount-amount">{formatMoney(item.newPrice)}</div>
                             </div>

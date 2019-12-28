@@ -5,6 +5,7 @@ import Head from 'next/head';
 import PageInfo from '../PageInfo/PageInfo';
 import User from '../User/User';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import Spinner from '../Spinner/Spinner';
 import AddWishlistItemToCart from '../Wishlist/AddWishlistItemToCart';
 
@@ -66,7 +67,7 @@ const Wishlist = () => {
                           <div className="wrapper">
                             <div className="top">
                                 <div className="item-name">
-                                  {wishlistItem.item.itemName}
+                                  {formatLetters(wishlistItem.item.itemName)}
                                 </div>
                                 <AddWishlistItemToCart id={wishlistItem.item.id} wishlistItem={wishlistItem} />
                               </div>

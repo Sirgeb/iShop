@@ -7,6 +7,7 @@ import Table from '../styles/Table';
 import User from '../User/User';
 import Spinner from '../Spinner/Spinner';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import RemoveFromCart from './RemoveFromCart';
 import IncreaseItem from './IncreaseItem';
 import DecreaseItem from './DecreaseItem';
@@ -69,7 +70,7 @@ const Cart = () => {
                         <td>
                           <img src={cartItem.item.image1} />
                         </td>
-                        <td> {cartItem.item.itemName} </td>
+                        <td> {formatLetters(cartItem.item.itemName)} </td>
                         <td>
                           <div className="cell-content-wrapper">
                             <DecreaseItem id={cartItem.item.id} /> <button>{cartItem.quantity}</button> <IncreaseItem id={cartItem.item.id} />

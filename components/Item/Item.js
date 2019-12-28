@@ -8,6 +8,7 @@ import ItemStyles from './ItemStyles';
 import PageInfo from '../PageInfo/PageInfo';
 import Spinner from '../Spinner/Spinner';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import User from '../User/User';
 import AddToCart from '../Cart/AddToCart';
 import AddToWishlist from '../Wishlist/AddToWishlist';
@@ -47,9 +48,9 @@ const Item = ({ id }) => {
                     return (
                       <>
                       <Head>
-                        <title>iShop | {itemName}</title>
+                        <title>iShop | {formatLetters(itemName)}</title>
                       </Head>
-                      <PageInfo message1={itemName} message2="" />
+                      <PageInfo message1={formatLetters(itemName)} message2="" />
                         <ItemStyles>
                           <div className="item">
                             <div className="flip-card">

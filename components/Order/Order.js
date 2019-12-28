@@ -5,6 +5,7 @@ import gql from 'graphql-tag';
 import Head from 'next/head';
 
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import PageInfo from '../PageInfo/PageInfo';
 import Spinner from '../Spinner/Spinner';
 
@@ -31,7 +32,7 @@ const USER_ORDERS_QUERY = gql`
 const Order = () => {
 
   return (
-    <Query query={USER_ORDERS_QUERY}>
+    <Query query={USER_ORDERS_QUERY} fetchPolicy="network-only">
       {
         ({ data, loading }) => {
           if (loading) return <Spinner spacing="200px"/>
@@ -79,7 +80,7 @@ const Order = () => {
                               <div className="item" key={item.id}>
                                   <img src={item.image1} alt={item.itemName} width="100" height="100" />
                                   <div className="item-details">
-                                    <span>Name: {item.itemName}</span>
+                                    <span>Name: {formatLetters(item.itemName)}</span>
                                     <span>Quantity: {item.quantity}</span>
                                   </div>
                                   <div className="item-details">

@@ -4,8 +4,10 @@ import gql from 'graphql-tag';
 import debounce from 'lodash.debounce';
 import Downshift, { resetIdCounter } from 'downshift';
 import Router from 'next/router';
+
 import  { DropDown, DropDownItem, SearchStyles } from './SearchStyles';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 
 const SEARCH_ITEMS_QUERY = gql`
   query SEARCH_ITEMS_QUERY($searchTerm: String!) {
@@ -63,7 +65,7 @@ class Search extends React.Component {
                         <input 
                           {...getInputProps({ 
                             type: "search",
-                            placeholder: "Search here...",
+                            placeholder: "What do you want to buy?",
                             className: this.state.loading ? 'loading': '',
                             onChange: e => {
                                 e.persist();
@@ -86,7 +88,7 @@ class Search extends React.Component {
                             >
                             <div className="img-text">
                               <img width="50" src={item.image1} alt={item.itemName} />
-                              <span>{item.itemName}</span>
+                              <span>{formatLetters(item.itemName)}</span>
                             </div>
                             <span>{formatMoney(item.newPrice)}</span>
                           </DropDownItem>)}

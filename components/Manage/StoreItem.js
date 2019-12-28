@@ -6,6 +6,7 @@ import Router, { withRouter } from 'next/router';
 
 import { ALL_ITEMS_QUERY } from './Manage';
 import formatMoney from '../../lib/formatMoney';
+import formatLetters from '../../lib/formatLetters';
 import { IconStyle } from './ManageStyles';
 
 const DELETE_ITEM_MUTATION = gql`
@@ -22,7 +23,7 @@ const StoreItem = ({ id, itemName, image1, newPrice, router, admin }) => {
       <td>
         <img src={image1} alt={itemName}/>
       </td>
-      <td>{itemName}</td>
+      <td>{formatLetters(itemName)}</td>
       <td>{formatMoney(newPrice)}</td>
       <td>
         <IconStyle>

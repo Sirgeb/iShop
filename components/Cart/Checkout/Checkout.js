@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import formatMoney from '../../../lib/formatMoney';
+import formatLetters from '../../../lib/formatLetters';
 import calcTotalPrice from '../../../lib/calcTotalPrice';
 import PayNow from '../PayNow';
 import CheckoutStlyles from './CheckoutStyles';
@@ -30,7 +31,7 @@ const Checkout = ({ cartItems }) => {
               )
               return (
                 <li key={cartItem.item.id}>
-                  <span>{cartItem.item.itemName} x {cartItem.quantity} </span>
+                  <span>{formatLetters(cartItem.item.itemName)} x {cartItem.quantity} </span>
                   <span className="amount">{formatMoney(cartItem.item.newPrice * cartItem.quantity)}</span>
                 </li>
              )} 

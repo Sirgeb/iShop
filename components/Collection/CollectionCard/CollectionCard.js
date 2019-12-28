@@ -1,8 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
+
 import formatMoney from '../../../lib/formatMoney';
 import AddToCart from '../../Cart/AddToCart';
 import AddToWishlist from '../../Wishlist/AddToWishlist';
+import formatLetters from '../../../lib/formatLetters';
 
 import CollectionCardStyles from './CollectionCardStyles';
 
@@ -24,7 +26,7 @@ const CollectionCard = ({id, itemName, image1, newPrice, amount, discountPercent
         <div className="wrapper">
           <div className="top">
               <div className="item-name">
-                {itemName}
+                {formatLetters(itemName)}
               </div>
               <AddToWishlist id={id} wishlist={me && me.wishlist} />
               <AddToCart id={id}/>
