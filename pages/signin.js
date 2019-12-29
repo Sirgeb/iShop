@@ -1,11 +1,14 @@
 import React from 'react';
 
 import SigninComponent from '../components/Signin/Signin';
+import SigninAuth from '../components/Signin/SigninAuth';
 
 const Signin = () => {
 
   return (
-    <SigninComponent />
+    <SigninAuth>
+      <SigninComponent />
+    </SigninAuth>
   )
 }
 
