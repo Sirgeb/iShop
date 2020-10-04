@@ -40,7 +40,7 @@ const Cart = () => {
                     src="https://assets2.lottiefiles.com/temp/lf20_jzqS18.json"  
                     background="transparent"  
                     speed="1"  
-                    className={{ width: "250px", height: "250px"}}
+                    style={{ width: "250px", height: "250px"}}
                     loop  
                     autoplay>
                   </lottie-player>
