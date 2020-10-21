@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import gql from 'graphql-tag';
 import { withRouter } from 'next/router';
 
@@ -43,6 +43,10 @@ const PAGINATION_QUERY = gql`
 `;
 
 const IncredibleOffer = ({ query, router }) => {
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+  
   return (
     <>
       <IncredibleOfferComponent
