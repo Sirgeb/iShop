@@ -1,6 +1,5 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { gql, useMutation } from '@apollo/client'
 import Link from 'next/link';
 import Router, { withRouter } from 'next/router';
 
@@ -18,6 +17,10 @@ const DELETE_ITEM_MUTATION = gql`
 `;
 
 const StoreItem = ({ id, itemName, image1, newPrice, router, admin }) => {
+  const [deleteItem] = useMutation(DELETE_ITEM_MUTATION, { 
+    variables: { id }, refetchQueries: [{ query: ALL_ITEMS_QUERY}] 
+  });
+
   return (
     <tr>
       <td>
@@ -53,48 +56,36 @@ const StoreItem = ({ id, itemName, image1, newPrice, router, admin }) => {
 
         </IconStyle>
       </td>
-        <Mutation 
-          mutation={DELETE_ITEM_MUTATION}
-          refetchQueries={[{ query: ALL_ITEMS_QUERY }]}
-          variables={{
-            id
-          }}
-        >
-        {
-          (deleteItem) => (
-            <td>
-              <IconStyle>
-                {
-                  admin && (
-                    <i 
-                      className="fas fa-trash-alt icon remove" 
-                      title="Remove"
-                      onClick={async () => {
-                          if (confirm('Click OK to delete this item?')) {
-                            await deleteItem().catch(err => alert(err.message));
-                            Router.push({
-                              pathname: router.pathname,
-                            });
-                          }
-                      }}
-                    ></i>
-                  )
-                }
-               
-                {
-                  !admin && (
-                    <i 
-                      className="fas fa-trash-alt icon remove" 
-                      title="Remove"
-                      onClick={() =>alert("Sorry, You don't have permission to delete")}
-                    ></i>
-                  )
-                }
-              </IconStyle>
-            </td>
-          )
-        }
-        </Mutation>
+      <td>
+        <IconStyle>
+          {
+            admin && (
+              <i 
+                className="fas fa-trash-alt icon remove" 
+                title="Remove"
+                onClick={async () => {
+                    if (confirm('Click OK to delete this item?')) {
+                      await deleteItem().catch(err => alert(err.message));
+                      Router.push({
+                        pathname: router.pathname,
+                      });
+                    }
+                }}
+              ></i>
+            )
+          }
+          
+          {
+            !admin && (
+              <i 
+                className="fas fa-trash-alt icon remove" 
+                title="Remove"
+                onClick={() =>alert("Sorry, You don't have permission to delete")}
+              ></i>
+            )
+          }
+        </IconStyle>
+      </td>
     </tr>
   ) 
 }

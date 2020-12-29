@@ -1,5 +1,4 @@
-import React from 'react';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { withRouter } from 'next/router';
 
 import Collection from '../../components/Collection/Collection';

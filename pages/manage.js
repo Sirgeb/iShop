@@ -1,5 +1,3 @@
-import React from 'react';
-
 import SigninAuth from '../components/Signin/SigninAuth';
 import ManageComponent from '../components/Manage/Manage';
 

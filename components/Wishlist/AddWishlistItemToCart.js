@@ -1,6 +1,5 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { gql, useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User/User';
 
 const ADD_WISHLIST_ITEM_TO_CART_MUTATION = gql`
@@ -12,37 +11,31 @@ const ADD_WISHLIST_ITEM_TO_CART_MUTATION = gql`
 `;
 
 const AddWishListItemToCart = ({ id, wishlistItem }) => {
+  const [moveItemToCart, { loading }] = useMutation(
+    ADD_WISHLIST_ITEM_TO_CART_MUTATION, { 
+      variables: { id, wishListItemId: wishlistItem.id },
+      refetchQueries: [{ query: CURRENT_USER_QUERY }]
+    });
 
-    return (
-            <Mutation 
-              mutation={ADD_WISHLIST_ITEM_TO_CART_MUTATION} 
-              refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-              variables={{
-                id,
-                wishListItemId: wishlistItem.id
-              }}
-              >
-            {
-              (moveItemToCart, { loading }) => (
-                <button 
-                  title="Add to Cart"
-                  onClick={() => {
-                    moveItemToCart().catch(err => alert(err.message));
-                  }}
-                  disabled={loading}
-                >
-                {
-                  loading ? 
-                    (<i className="fas fa-circle-notch fa-spin icon"></i>) 
-                    :
-                    (<i>Add To Cart</i>)
-                }
-                
-                </button>
-              )
-            }
-        </Mutation>
-    )
+  return (
+    <button 
+      title="Add to Cart"
+      onClick={() => {
+        moveItemToCart().catch(err => alert(err.toString()));
+      }}
+      disabled={loading}
+    >
+    {
+      loading ? (
+        <i className="fas fa-circle-notch fa-spin icon"></i>
+      ) 
+        :
+      (
+        <i>Add To Cart</i>
+      )
+    }
+    </button>
+  )
 }
 
 export default AddWishListItemToCart;

@@ -1,72 +1,54 @@
 import React from 'react';
-import { Query } from 'react-apollo';
+import { useQuery } from '@apollo/client';
 
+import { useUserData } from '../../hooks/AppContext';
 import formatText from '../../lib/formatText';
 import PageInfo from '../../components/PageInfo/PageInfo';
 import CollectionHeader from './CollectionHeader/CollectionHeader';
 import CollectionCard from './CollectionCard/CollectionCard';
 import Spinner from '../Spinner/Spinner';
-import User from '../User/User';
 
 import CollectionStyles from './CollectionStyles';
 
 const Collection = ({ collectionQuery, collectionName, pageLink, onCollectionPreview, variables }) => {
+  const { data } = useUserData();
+  const { data: collectionData, loading } = useQuery(collectionQuery, { variables })
 
-  return ( 
-    <User>
+  if (data === undefined) return null;
+  if (loading) return <Spinner spacing="200px" />;
+
+  return (
+    <>
       {
-        ({ data, loading}) => {
-
-          if (loading) return null;
-
-          const me = data.me;
-
-          return (
-            <Query query={collectionQuery} variables={variables}>
-              {
-                ({ data, loading }) => {
-                  if (loading) return <Spinner spacing="200px" />;
-
-                  return (
-                    <>
-                      {
-                        !onCollectionPreview && (
-                          <PageInfo 
-                            message1={` ${formatText(data.currentItem.length, collectionName)} `}
-                          />
-                        )
-                      }
-                    
-                      {
-                        onCollectionPreview && (
-                          <CollectionHeader 
-                            currentItem={data.currentItem} 
-                            collectionName={collectionName} 
-                            pageLink={pageLink}
-                          />
-                        )
-                      }
-              
-                      <CollectionStyles>
-                          <div className="collection-items">
-                            {
-                              data.items.map(item => (
-                                <CollectionCard 
-                                  { ...item} key={item.id} me={me} onCollectionPreview={onCollectionPreview}
-                                />
-                              ))
-                            }
-                          </div>
-                      </CollectionStyles>
-                    </>
-                  )
-                }
-              }
-            </Query>
-          )
-        }
+        !onCollectionPreview && (
+          <PageInfo 
+            message1={` ${formatText(collectionData.currentItem.length, collectionName)} `}
+          />
+        )
       }
-  </User>
+    
+      {
+        onCollectionPreview && (
+          <CollectionHeader 
+            currentItem={collectionData.currentItem} 
+            collectionName={collectionName} 
+            pageLink={pageLink}
+          />
+        )
+      }
+
+      <CollectionStyles>
+        <div className="collection-items">
+          {
+            collectionData.items.map(item => (
+              <CollectionCard 
+                { ...item} key={item.id} me={data.me} onCollectionPreview={onCollectionPreview}
+              />
+            ))
+          }
+        </div>
+      </CollectionStyles>
+    </>
   )
 }
 

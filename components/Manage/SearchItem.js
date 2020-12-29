@@ -1,6 +1,5 @@
 import React from 'react';
-import { ApolloConsumer } from 'react-apollo';
-import gql from 'graphql-tag';
+import { ApolloConsumer, gql } from '@apollo/client';
 
 import { CURRENT_USER_QUERY } from '../User/User';
 import SearchItemStyles from './SearchItemStyles';

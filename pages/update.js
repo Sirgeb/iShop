@@ -1,5 +1,3 @@
-import React from 'react';
-
 import UpdateItem from '../components/UpdateItem/updateItem';
 import SigninAuth from '../components/Signin/SigninAuth';
 

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import WishlistComponent from '../components/Wishlist/Wishlist';
 import SigninAuth from '../components/Signin/SigninAuth';
 

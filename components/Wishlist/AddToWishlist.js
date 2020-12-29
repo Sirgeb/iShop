@@ -1,7 +1,6 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
+import { gql, useMutation } from '@apollo/client';
 import { CURRENT_USER_QUERY } from '../User/User';
-import gql from 'graphql-tag';
 import formatError from '../../lib/formatError';
 
 const ADD_TO_WISHLIST_MUTATION = gql`
@@ -13,59 +12,56 @@ const ADD_TO_WISHLIST_MUTATION = gql`
 `;
 
 const AddToWishList = ({ id, wishlist }) => {
+  const [addToWishList, { loading }] = useMutation(ADD_TO_WISHLIST_MUTATION, { 
+    variables: { id },
+    refetchQueries: [{ query: CURRENT_USER_QUERY }] 
+  })
+
   let active = false;
 
   return (
-    <Mutation 
-      mutation={ADD_TO_WISHLIST_MUTATION} 
-      refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-      variables={{ id }}>
-      {
-        (addToWishList, { loading }) => (
-          <button 
-            title="Add To Wishlist"
-            className={`add-to-wishlist btn`}
-            onClick={() => {
-              return addToWishList().catch(err => alert(formatError(err.message)));
-            }}
-            disabled={loading}
-          > 
-          {
-            wishlist && (
-              <>
-                { 
-                   (wishlist.map(wishListItem => {
-                    if (wishListItem.item.id.includes(id)) {
-                      return  (
-                        <div key={wishListItem.item.id}>
-                          {
-                            active = true
-                          }
-                          {
-                            loading ? 
-                             (<i className="fas fa-circle-notch fa-spin icon"></i>) 
-                              :
-                             (<i className="fas fa-heart icon active"></i>) 
-                          }
-                        </div>
-                      )
-                    } 
-                  })) 
-                }
-              </>
-            )  
+    <button 
+      title="Add To Wishlist"
+      className={`add-to-wishlist btn`}
+      onClick={() => {
+        return addToWishList().catch(err => alert(formatError(err.toString())));
+      }}
+      disabled={loading}
+    > 
+    {
+      wishlist && (
+        <>
+          { 
+              (wishlist.map(wishListItem => {
+              if (wishListItem.item.id.includes(id)) {
+                return  (
+                  <div key={wishListItem.item.id}>
+                    {
+                      active = true
+                    }
+                    {
+                      loading ? 
+                        (<i className="fas fa-circle-notch fa-spin icon"></i>) 
+                        :
+                        (<i className="fas fa-heart icon active"></i>) 
+                    }
+                  </div>
+                )
+              } 
+            })) 
           }
-          {
-            !active && (
-              loading ? <i className="fas fa-circle-notch fa-spin icon"></i> : 
-              <i className="fas fa-heart icon" key={id}></i>
-            ) 
-          }
-          </button>
-        )
-      }
-    </Mutation>
+        </>
+      )  
+    }
+    {
+      !active && (
+        loading ? <i className="fas fa-circle-notch fa-spin icon"></i> : 
+        <i className="fas fa-heart icon" key={id}></i>
+      ) 
+    }
+    </button>
   )
+
 }
 
 export default AddToWishList;

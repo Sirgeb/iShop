@@ -1,6 +1,5 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useMutation, gql } from '@apollo/client'
 import { CURRENT_USER_QUERY } from '../User/User';
 
 const DECREASE_ITEM_MUTATION = gql`
@@ -13,25 +12,17 @@ const DECREASE_ITEM_MUTATION = gql`
 `;
 
 const DecreaseItem = ({ id }) => {
+  const [decreaseItem, { loading }] = useMutation(DECREASE_ITEM_MUTATION, { variables: { id }, refetchQueries: [{ query: CURRENT_USER_QUERY }]})
+
   return (
-    <Mutation 
-      mutation={DECREASE_ITEM_MUTATION} 
-      variables={{ id }} 
-      refetchQueries={[{ query: CURRENT_USER_QUERY}]}
+    <button 
+      disabled={loading}
+      onClick={ () => decreaseItem().catch(err => alert(err.toString()))}
       >
-        {
-          (decreaseItem, { loading }) => (
-            <button 
-              disabled={loading}
-              onClick={ () => decreaseItem().catch(err => alert(err.message))}
-              >
-              {
-                loading ? <i className="fas fa-circle-notch fa-spin"></i> : "-"
-              }
-            </button>
-          )
-        }
-    </Mutation>
+      {
+        loading ? <i className="fas fa-circle-notch fa-spin"></i> : "-"
+      }
+    </button>
   )
 }
 

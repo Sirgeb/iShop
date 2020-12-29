@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Mutation } from 'react-apollo';
+import { gql, useMutation } from '@apollo/client';
 import Router from 'next/router';
-import gql from 'graphql-tag';
 import Link from 'next/link';
 import Head from 'next/head';
 
@@ -35,13 +34,15 @@ const authMessage = {
 
 const Signin = ({ pathname }) => {
   const [user, setUser] = useState(INITIAL_STATE);
+  const [signin, { loading, error }] = useMutation(SIGN_IN_MUTATION, { refetchQueries: [{ query: CURRENT_USER_QUERY }]})
+
 
   function handleChange(event) {
     const { name, value } = event.target;
     setUser((prevState) => ({...prevState, [name]: value}));
   }
 
-  async function handleSubmit(event, signin) {
+  async function handleSubmit(event) {
     event.preventDefault();
     await signin({
       variables: { ...user}
@@ -55,75 +56,63 @@ const Signin = ({ pathname }) => {
     }
   }
 
-  return (  
-    <Mutation 
-      mutation={SIGN_IN_MUTATION}
-      refetchQueries={[{ query: CURRENT_USER_QUERY}]}> 
-      {
-        (signin, { data, loading, error }) => {
+  if (loading) return (
+    <>
+      <PageInfo message1="Signing in..." />
+      <Spinner />
+    </>
+  );
+  
+  return (
+    <> 
+      <Head>
+        <title>iShop | Sign in </title>
+      </Head>
+      <PageInfo 
+          message1={"Sign in"} 
+          message2={
+            error ? formatError(error.message) : 
+            pathname === "/manage" ? authMessage.manage :
+            pathname === "/wishlist" ? authMessage.wishlist :
+            pathname === "/cart" ? authMessage.cart :
+            pathname === "/orders" ? authMessage.orders :
+            pathname === "/add" ? authMessage.add: null
+          }
+        />
 
-          if (loading) return (
-            <>
-              <PageInfo message1="Signing in..." />
-              <Spinner />
-            </>
-          );
-          
-          return (
-            <> 
-              <Head>
-                <title>iShop | Sign in </title>
-              </Head>
-              <PageInfo 
-                  message1={"Sign in"} 
-                  message2={
-                    error ? formatError(error.message) : 
-                    pathname === "/manage" ? authMessage.manage :
-                    pathname === "/wishlist" ? authMessage.wishlist :
-                    pathname === "/cart" ? authMessage.cart :
-                    pathname === "/orders" ? authMessage.orders :
-                    pathname === "/add" ? authMessage.add: null
-                  }
-                />
+      <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event)}>
+        <input 
+          type="email" 
+          name="email"
+          onChange={handleChange}
+          value={user.email}
+          id="email"
+        />
+        <label htmlFor="email">Email</label>
 
-              <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event, signin)}>
-                <input 
-                  type="email" 
-                  name="email"
-                  onChange={handleChange}
-                  value={user.email}
-                  id="email"
-                />
-                <label htmlFor="email">Email</label>
+        <div className="divider"></div>
 
-                <div className="divider"></div>
+        <input 
+          type="password" 
+          name="password"
+          onChange={handleChange}
+          value={user.password}
+          id="password"
+        />
+        <label htmlFor="password">Password</label>
 
-                <input 
-                  type="password" 
-                  name="password"
-                  onChange={handleChange}
-                  value={user.password}
-                  id="password"
-                />
-                <label htmlFor="password">Password</label>
+        <div className="divider"></div>
 
-                <div className="divider"></div>
-
-                <Center>
-                  <button type="submit">Signin</button> 
-                  <p>Don't have an account?&nbsp;
-                    <Link href="/signup">
-                      <a>Sign up</a>
-                    </Link>
-                  </p>
-                </Center>
-              </Form>
-            </>
-          )
-        }
-      }
-
-    </Mutation>
+        <Center>
+          <button type="submit">Signin</button> 
+          <p>Don't have an account?&nbsp;
+            <Link href="/signup">
+              <a>Sign up</a>
+            </Link>
+          </p>
+        </Center>
+      </Form>
+    </>
   )
 }
 

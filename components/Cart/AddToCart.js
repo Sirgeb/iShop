@@ -1,7 +1,6 @@
 import React from 'react';
-import { Mutation } from 'react-apollo';
+import { useMutation, gql } from '@apollo/client'
 import { CURRENT_USER_QUERY } from '../User/User';
-import gql from 'graphql-tag';
 
 import formatError from '../../lib/formatError';
 
@@ -14,31 +13,19 @@ const ADD_TO_CART_MUTATION = gql`
   }
 `;
 
-
 const AddToCart = ({ id }) => {
-  
-  return (
-    <Mutation 
-        mutation={ADD_TO_CART_MUTATION} 
-        refetchQueries={[{ query: CURRENT_USER_QUERY }]}
-        variables={{
-          id
+  const [addToCart, { loading }] = useMutation(ADD_TO_CART_MUTATION, { variables: { id }, refetchQueries: [{ query: CURRENT_USER_QUERY }]  })
+
+    return (
+      <button 
+        title="Add to Cart"
+        className="add-to-cart btn"
+        onClick={() => {
+          addToCart().catch(err => alert(formatError(err.toString())));
         }}
-        >
-      {
-        (addToCart, { loading }) => (
-          <button 
-            title="Add to Cart"
-            className="add-to-cart btn"
-            onClick={() => {
-              addToCart().catch(err => alert(formatError(err.message)));
-            }}
-            disabled={loading}
-          >Add{loading ? "ing " : " "}To Cart</button>
-        )
-      }
-    </Mutation>
-  );
+        disabled={loading}
+      >Add{loading ? "ing " : " "}To Cart</button>
+    )
 }
 
 export default AddToCart;

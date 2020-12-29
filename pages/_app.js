@@ -1,32 +1,29 @@
-import App from "next/app";
-import { ApolloProvider } from 'react-apollo';
-import withApollo from '../lib/withApollo';
+import { ApolloProvider } from '@apollo/client'
+import { useApollo } from '../lib/apolloClient'
+import AppContext from '../hooks/AppContext';
 import Layout from '../components/_App/Layout/Layout';
 
-class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    // ensure all queries and mutations are ran before first render
-    let pageProps = {};
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx);
-    }
+const App = ({ Component, pageProps }) => {
+  const apolloClient = useApollo(pageProps)
 
-    // this exposes the query to the user
-    pageProps.query = ctx.query;
-    return { pageProps };
-  }
-
-  render() {
-    const { Component, pageProps, apollo } = this.props;
-    
-    return (
-      <ApolloProvider client={apollo}>
+  return (
+    <ApolloProvider client={apolloClient}>
+      <AppContext>
         <Layout>
-          <Component {...pageProps}/>
+          <Component {...pageProps} />
         </Layout>
-      </ApolloProvider>
-    );
-  }
+      </AppContext>
+    </ApolloProvider>
+  )
 }
 
-export default withApollo(MyApp);
+App.getInitialProps = async ({ Component, ctx }) => {
+  let pageProps = {};
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx);
+  }
+  pageProps.query = ctx.query;
+  return { pageProps };
+}
+
+export default App;

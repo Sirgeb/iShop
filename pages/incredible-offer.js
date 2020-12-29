@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react';
-import gql from 'graphql-tag';
+import { gql } from '@apollo/client';
 import { withRouter } from 'next/router';
 
 import Pagination from '../components/Pagination/Pagination';
