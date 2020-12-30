@@ -71,7 +71,7 @@ const Signin = ({ pathname }) => {
       <PageInfo 
           message1={"Sign in"} 
           message2={
-            error ? formatError(error.message) : 
+            error ? formatError(error.toString()) : 
             pathname === "/manage" ? authMessage.manage :
             pathname === "/wishlist" ? authMessage.wishlist :
             pathname === "/cart" ? authMessage.cart :

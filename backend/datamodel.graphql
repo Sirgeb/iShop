@@ -1,0 +1,79 @@
+type User {
+  id: ID! @id @unique
+  username: String!
+  email: String! @unique
+  password: String!
+  resetToken: String
+  resetTokenExpiry: String
+  permissions: [Permission] @scalarList(strategy: RELATION)
+  updatedAt: DateTime! @updatedAt
+  createdAt: DateTime! @createdAt
+  cart: [CartItem!]!  @relation(name: "CartItemOfUser", onDelete: CASCADE)
+  wishlist:[WishListItem!]!  @relation(name: "WishListItemOfUser", onDelete: CASCADE)
+  order: [Order!]! @relation(name: "OrderOfUser", onDelete: CASCADE)
+}
+
+type Item {
+  id: ID! @id @unique
+  itemName: String!
+  discountPercent: Int
+  category: Category!
+  image1: String!
+  image2: String
+  amount: Int!
+  newPrice: Int
+  description: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type CartItem {
+  id: ID! @id @unique
+  quantity: Int! @default(value: 1)
+  item: Item 
+  user: User! @relation(name: "CartItemOfUser")
+}
+
+type WishListItem {
+  id: ID! @id @unique
+  item: Item 
+  user: User! @relation(name: "WishListItemOfUser")
+}
+
+type OrderItem {
+  id: ID! @id @unique
+  itemName: String!
+  image1: String!
+  image2: String
+  newPrice: Int
+  description: String!
+  quantity: Int! @default(value: 1)
+  user: User
+}
+
+type Order {
+  id: ID! @id @unique
+  items: [OrderItem!]! 
+  total: Int! 
+  user: User! @relation(name: "OrderOfUser")
+  charge: String!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+enum Category {
+  BAG
+  SHOE
+  SHIRT
+  WRISTWATCH
+  DEVICE
+}
+
+enum Permission {
+  ADMIN
+  USER  
+  ITEMCREATE
+  ITEMUPDATE
+  ITEMDELETE
+  PERMISSIONUPDATE
+}

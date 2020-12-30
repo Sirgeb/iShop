@@ -5,3 +5,5 @@ dist
 # next.config.*
 # now.json
 .vercel
+
+variables.env

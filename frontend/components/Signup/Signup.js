@@ -58,7 +58,7 @@ const Signup = () => {
       <Head>
         <title>iShop | Sign up </title>
       </Head>
-      <PageInfo message1="Sign up" message2={formatError(error && error.message)} />
+      <PageInfo message1="Sign up" message2={formatError(error && error.toString())} />
         <Form autoComplete="off" method="post" onSubmit={(event) => handleSubmit(event)}>
           <input 
             type="text" 
